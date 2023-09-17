@@ -1,0 +1,102 @@
+<div class="firstLines">
+  <div class="row">
+    <div class="col-md-4 mt-2">
+      <label class="visa_heading mx-3">Company Master</label>
+    </div>
+    <div
+      class="col-md-7 d-flex justify-content-end mt-2"
+      style="margin-left: 72px"
+    >
+      <button class="addVisa text-white" (click)="openCompany()">
+        <img
+          src="../../../assets/addPassport.svg"
+          style="
+            margin-right: 4px;
+            left: 89.2%;
+            right: 10.12%;
+            top: 13.65%;
+            bottom: 85.28%;
+          "
+        />
+        New Company
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="serchBypipe" style="height: 15vh">
+  <div class="row">
+    <!-- <div class="col-md-10 d-flex justify-content-center">
+      <input
+        type="text"
+        name="search"
+        class="SearchForex"
+        id="searhPipes"
+        placeholder="Search"
+        autocomplete="off"
+      />
+    </div> -->
+    <div class="search-hero">
+      <input
+        class="form-control"
+        type="text"
+        name="search"
+        [(ngModel)]="searchText"
+        autocomplete="off"
+        placeholder="Search"
+      />
+    </div>
+    <span>
+      <img src="../../../assets/search_icon.svg" />
+    </span>
+  </div>
+</div>
+
+<app-company-add
+  [opens]="pageOpenClicked"
+  [edit_company]="edit_company"
+  [editData]="editRowData"
+  [view]="view"
+  [viewData]="viewRowData"
+>
+</app-company-add>
+
+<div class="cards">
+  <div
+    *ngFor="
+      let company of companyData
+        | paginate : { itemsPerPage: 10, currentPage: p }
+        | filter : searchText
+    "
+  >
+    <mat-card class="example-card">
+      <img src="../../../assets/blank.svg" style="height: 50px" />
+      <mat-card-header> {{ company.emp_name }}</mat-card-header>
+      <div
+        class="content"
+        style="height: 50px; width: 230px; background-color: rgb(236, 213, 213)"
+      >
+        <p><span>Company :</span>{{ company.company_name }}</p>
+
+        <p style="height: 30px; width: 230px; background-color: #def8f2">
+          <img src="../../../assets/compurl.svg" style="height: 20px" />
+          <span>{{ company.email_id }}</span>
+        </p>
+
+        <p style="height: 30px; width: 230px; background-color: #def8f2">
+          <img src="../../../assets/Call.svg" style="height: 20px" />
+          <span>{{ company.phone }}</span>
+        </p>
+      </div>
+    </mat-card>
+  </div>
+  <div class="card_spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+<div class="pagination">
+  <pagination-controls
+    (pageChange)="p = $event"
+    class="float-right"
+  ></pagination-controls>
+</div>

@@ -1,0 +1,141 @@
+<div
+  *ngIf="opens"
+  class="event"
+  style="
+    height: 100%;
+    width: 93%;
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+    right: 0px;
+    background-color: white;
+  "
+>
+  <div class="HeadDivision mt-4">
+    <div class="col-md-5">
+      <label
+        style="
+          width: 390px;
+          height: 38px;
+          display: flex;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 32px;
+          line-height: 38px;
+          color: #004761;
+        "
+      >
+        Create Event</label
+      >
+    </div>
+    <div class="">
+      <div class="circle">
+        <div class="cross">
+          <img src="../../../assets/cross.svg" (click)="closeForm()" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <mat-dialog-content>
+    <form [formGroup]="event" (ngSubmit)="onSubmit()">
+      <div class="form_container position-relative">
+        <!-- <div class="row d-flex justify-content-between p-3 px-4"> -->
+        <div class="col-md-2 mt-2">
+          <label>Event Name</label>
+          <mat-form-field class="example-full-width" fxflex="75%">
+            <input
+              type="text"
+              class="border-0 border-bottom"
+              style="outline: none"
+              class="eventName"
+              formControlName="eventName"
+              matInput
+              [ngClass]="{
+                'is-invalid': submitted && c['eventName'].errors
+              }"
+            />
+            <div
+              *ngIf="submitted && c['eventName'].errors"
+              class="invalid-feedback"
+            >
+              <div class="mb-2" *ngIf="c['eventName'].errors['required']">
+                Event Name Required
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-2 mt-2">
+          <label>Description</label>
+          <mat-form-field class="example-full-width" fxflex="75%">
+            <input
+              type="text"
+              class="border-0 border-bottom"
+              style="outline: none"
+              class="description"
+              formControlName="description"
+              matInput
+              [ngClass]="{
+                'is-invalid': submitted && c['description'].errors
+              }"
+            />
+            <div
+              *ngIf="submitted && c['description'].errors"
+              class="invalid-feedback"
+            >
+              <div class="mb-2" *ngIf="c['description'].errors['required']">
+                Description Required
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+        <!-- </div> -->
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <!-- <div class="MainDiv mt-4">
+    <span style="color: black; font-size: 30px; margin-left: 28px"
+      >Create Event</span
+    >
+    <div class="circle">
+      <div class="cross">
+        <img src="../../../assets/cross.svg" />
+      </div>
+    </div>
+
+    <div class="SecondDiv mt-4 ps-4">
+      <span style="margin-left: 16px">Event Name</span>
+      <div>
+        <input
+          type="text"
+          style="width: 400px; border-radius: 50px; border: none; height: 38px"
+        />
+        <span style="margin-left: 13px">Description</span>
+        <div>
+          <input
+            type="text"
+            style="
+              width: 400px;
+              border-radius: 50px;
+              border: none;
+              height: 38px;
+            "
+          />
+        </div>
+      </div>
+    </div>
+    <div style="margin-left: 404px; margin-top: 25px">
+      <button
+        style="border: none; height: 40px; width: 80px; border-radius: 4px"
+      >
+        Submit
+      </button>
+    </div>
+  </div> -->
+</div>

@@ -1,0 +1,277 @@
+<div
+  *ngIf="opens"
+  class="forms_wrapper p-3 slide-in-right"
+  style="
+    height: 100%;
+    width: 93%;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: white;
+  "
+>
+  <div class="HeadDivision mt-4">
+    <div class="col-md-5">
+      <label
+        style="
+          width: 390px;
+          height: 38px;
+          display: flex;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 32px;
+          line-height: 38px;
+          color: #004761;
+        "
+      >
+        New Company</label
+      >
+    </div>
+    <div class="">
+      <div class="circle">
+        <div class="cross">
+          <img src="../../../assets/cross.svg" (click)="closeCompany()" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="col-md-2">
+    <div class="uploadLabels">
+      <label>Company Logo</label>
+    </div>
+    <div class="inputsFiles">
+      <div class="upload">
+        <input type="file" formControlName="uploadPassport" />
+      </div>
+    </div>
+  </div> -->
+
+  <form [formGroup]="newCompany" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div style="width: 50%">
+        <div class="col-md-6 mt-4">
+          <mat-form-field class="Company_adr" appearance="outline">
+            <input
+              type="text"
+              class="companyLogo"
+              formControlName="companyLogo"
+              matInput
+              placeholder="Company Logo"
+            />
+
+            <img src="../../../assets/blank.svg" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-5 mt-4">
+          <div class="phone">
+            <mat-form-field class="Phone" appearance="outline">
+              <input
+                type="text"
+                class="companyPhone"
+                formControlName="companyPhone"
+                matInput
+                placeholder="Phone Number"
+              />
+              <img src="../../../assets/Mobile.svg" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 mt-4">
+            <mat-form-field class="Web" appearance="outline">
+              <input
+                type="text"
+                class="companyWeb"
+                formControlName="companyWeb"
+                matInput
+                placeholder="Website"
+              />
+              <img src="../../../assets/Web.svg" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-md-3 mt-4">
+          <div class="location">
+            <mat-form-field class="location" appearance="outline">
+              <input
+                type="text"
+                class="companyLocation"
+                formControlName="companyLocation"
+                matInput
+                placeholder="Location"
+              />
+              <img src="../../../assets/Location.svg" />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <!-- --------------------Div------------------------------->
+
+      <div class="" style="width: 50%">
+        <div>
+          <h1>Company Information</h1>
+          <div class="row">
+            <div class="col-md-4 mt-2">
+              <label>Company Name <span style="color: red">*</span></label>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input
+                  type="text"
+                  class="border-0 border-bottom"
+                  style="outline: none"
+                  class="companyName"
+                  formControlName="companyName"
+                  matInput
+                  [ngClass]="{
+                    'is-invalid': submitted && c['companyName'].errors
+                  }"
+                />
+                <div
+                  *ngIf="submitted && c['companyName'].errors"
+                  class="invalid-feedback"
+                >
+                  <div class="mb-2" *ngIf="c['companyName'].errors['required']">
+                    Company Name Required
+                  </div>
+                </div>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 mt-2">
+              <label>CIN</label>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input
+                  type="text"
+                  class="border-0 border-bottom"
+                  style="outline: none"
+                  class="cin"
+                  formControlName="cin"
+                  matInput
+                  [ngClass]="{
+                    'is-invalid': submitted && c['cin'].errors
+                  }"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 mt-0">
+              <label>URL</label>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input
+                  type="text"
+                  class="border-0 border-bottom"
+                  style="outline: none"
+                  class="url"
+                  formControlName="url"
+                  matInput
+                  [ngClass]="{
+                    'is-invalid': submitted && c['url'].errors
+                  }"
+                />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 mt-2">
+              <label>Contact Number</label>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input
+                  type="text"
+                  class="border-0 border-bottom"
+                  style="outline: none"
+                  class="contactNumber"
+                  formControlName="contactNumber"
+                  matInput
+                  [ngClass]="{
+                    'is-invalid': submitted && c['contactNumber'].errors
+                  }"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-4 mt-2">
+            <label>Address</label>
+            <mat-form-field class="Company_address" appearance="outline">
+              <input
+                type="text"
+                class="border-0 border-bottom"
+                style="outline: none"
+                class="companyAddress"
+                formControlName="companyAddress"
+                matInput
+                [ngClass]="{
+                  'is-invalid': submitted && c['companyAddress'].errors
+                }"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 mt-2">
+              <label>GSTIN</label>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input
+                  type="text"
+                  class="border-0 border-bottom"
+                  style="outline: none"
+                  class="gstin"
+                  formControlName="gstin"
+                  matInput
+                  [ngClass]="{
+                    'is-invalid': submitted && c['gstin'].errors
+                  }"
+                />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 mt-2">
+              <label>PAN</label>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input
+                  type="text"
+                  class="border-0 border-bottom"
+                  style="outline: none"
+                  class="pan"
+                  formControlName="pan"
+                  matInput
+                  [ngClass]="{
+                    'is-invalid': submitted && c['pan'].errors
+                  }"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="col-md-4 mt-2">
+            <label>TAN</label>
+            <mat-form-field class="Company_address" appearance="outline">
+              <input
+                type="text"
+                class="border-0 border-bottom"
+                style="outline: none"
+                class="tan"
+                formControlName="tan"
+                matInput
+                [ngClass]="{
+                  'is-invalid': submitted && c['tan'].errors
+                }"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="mandatory">
+          <span><span style="color: red">*</span> Mandatory fields</span>
+        </div>
+        <div>
+          <button *ngIf="!view" class="btn btn-primary" type="submit">
+            Confirm
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

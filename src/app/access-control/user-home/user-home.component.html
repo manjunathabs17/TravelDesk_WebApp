@@ -1,0 +1,83 @@
+<div class="MainDiv mt-4">
+  <div style="margin-left: 1100px; position: absolute; top: 14%">
+    <button
+      style="
+        background-color: #004761;
+        text-align: center;
+        background-color: #004761;
+        padding-left: 15px;
+        border: 1px;
+        cursor: pointer;
+
+        color: #e2f5fb;
+        border: none;
+        height: 30px;
+        width: 150px;
+        border-radius: 10px;
+      "
+      (click)="openAccess()"
+    >
+      Create User
+    </button>
+  </div>
+</div>
+
+<!-- <div class="serchBypipe" style="height: 10vh">
+  <div class="row">
+    <div class="col-md-10 d-flex justify-content-center">
+      <input matInput />
+    </div>
+    <span>
+      <img src="../../../assets/search_icon.svg" />
+    </span>
+  </div>
+</div> -->
+
+<div class="container">
+  <div class="row">
+    <div class="search-hero">
+      <input
+        class="form-control"
+        type="text"
+        name="search"
+        [(ngModel)]="searchText"
+        autocomplete="off"
+        placeholder="Search"
+      />
+    </div>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>User Name</th>
+          <th>Email ID</th>
+          <th>Company</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of tableData | filter : searchText">
+          <td>{{ user.username }}</td>
+          <td>{{ user.email_id }}</td>
+          <td>{{ user.company_name }}</td>
+          <td>{{ user.accessaction }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <app-create-user
+      [opens]="pageOpenClicked"
+      (closeEvent)="receivedEvent($event)"
+      [updateAccess]="updateAccess"
+      [updateData]="updateAccessData"
+    >
+    </app-create-user>
+
+    <app-custom-mat-table
+      *ngIf="!loading"
+      [headerCols]="hederColumns"
+      [tabelData]="tableData"
+      (updateAccessControle)="updateAccessControle($event)"
+    >
+    </app-custom-mat-table>
+  </div>
+</div>

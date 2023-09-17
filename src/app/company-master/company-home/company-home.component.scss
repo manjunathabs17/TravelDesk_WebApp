@@ -1,0 +1,91 @@
+.visa_heading{
+    // width: 213px;
+// height: 47px;
+// left: 123px;
+// top: 129px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 700;
+font-size: 30px;
+line-height: 47px;
+/* identical to box height */
+
+color: #283B42;
+}
+
+.addVisa{
+    padding: 10px;
+    width: 161px;
+height: 35px;
+left: 1526px;
+top: 141px;
+background: none;
+border: none;
+outline: none;
+
+// background-image: url(../../../assets/plusicon.svg) 10px 10px no-repeat;
+background: #004761;
+border-radius: 11px;
+}
+
+#searhPipes {
+    width: 40%;
+    outline: none;
+    border-radius: 30px;
+    padding: 2px 40px;
+    height: 5vh;
+    border: none;
+    border: 1px solid black;
+      border-top-color: black;
+      border-right-color: black;
+      border-bottom-color: black;
+      border-left-color: black;
+    border-color: #283b42;
+    // background: url(Search.1adedf790194732c.svg) no-repeat 13px 9px;
+    display: inline-block;
+  }
+
+  .example-card {
+    max-width: 230px;
+    max-height: 285px;
+  }
+
+  .cards {
+    // margin-top: 20px;
+    display: flex;
+    // flex-wrap: nowrap;
+    overflow: scroll;
+     gap: 20px;
+     height: 370px;
+     width: 1340px;
+    align-items: center;
+     flex-flow: row wrap;
+     margin-left: 30px;
+    //  flex-direction: row;
+    
+  }
+  .example-card{
+    // overflow: scroll;
+    height: 200px;
+  }
+   
+  .card_spinner{
+
+    margin-left: 600px;
+    margin-top: 300px;
+  
+  }
+  
+  .pagination{
+    align-items: center;
+    // margin-top: 30px;
+    margin-left: 400px;
+    font-size: larger;
+    margin-top: 30px;
+  }
+  .search-hero {
+    max-width: 500px;
+    padding-bottom: 50px;
+    margin:auto;
+  }

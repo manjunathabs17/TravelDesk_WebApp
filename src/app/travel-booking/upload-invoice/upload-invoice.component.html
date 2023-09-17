@@ -1,0 +1,1631 @@
+<!-- ----------------------Upload Invoice-------------------------- -->
+<!-- style="display: flex; align-items: center; background: rgba(62, 129,
+          153, 0.2); color: rgba(76, 156, 219, 0.8); border-radius: 2px; width:
+          100%; padding: 5px; -->
+
+<div class="row invoice_header px-5 py-10 m-2 mt-3" style="padding: 5px">
+  <div class="row d-flex justify-content-between" style="row-gap: 2px">
+    <div class="col-6 h3 p-0">Upload Invoice</div>
+
+    <mat-dialog-content>
+      <div
+        class="form-group uploadInvoice d-flex"
+        style="gap: 20px"
+        *ngFor="let invoice of invoiceArr; let i = index"
+      >
+        <div class="col-md-2 mt-2 text-center" style="width: min-content">
+          Name
+          <input
+            class="name"
+            width="10px"
+            [(ngModel)]="invoice.emp_name"
+            required
+            matInput
+            disabled
+          />
+          <div
+            *ngIf="multipleSubmitted && !invoice.emp_name"
+            class="invalid-feedback"
+          >
+            <div class="mb-2" *ngIf="!invoice.emp_name">
+              Employee name required
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-2 mt-2 text-center" style="width: min-content">
+          <label style="font-style: normal">Debited To</label>
+          <input
+            class="debitedTo"
+            style="width: min-content"
+            [(ngModel)]="invoice.debit_to"
+            matInput
+            disabled
+          />
+        </div>
+
+        <div class="col-md-2 mt-2 text-center" style="width: min-content">
+          <label>Travel</label>
+          <input
+            type="text"
+            class="travel"
+            [(ngModel)]="invoice.travel"
+            matInput
+            disabled
+          />
+        </div>
+
+        <div
+          class="col-md-2 mt-2 form-group text-center"
+          style="width: min-content"
+        >
+          <mat-label> Date of Invoice</mat-label>
+          <input
+            type="text"
+            matInput
+            [(ngModel)]="invoice.inv_rec_date"
+            [matDatepicker]="datepicker31"
+            placeholder="Select"
+            [ngClass]="{
+              'is-invalid': multipleSubmitted
+            }"
+          />
+          <div
+            *ngIf="
+              multipleSubmitted && !invoice.inv_rec_date && invoice.fileName
+            "
+            class="invalid-feedback"
+          >
+            <div class="mb-2" *ngIf="!invoice.inv_rec_date">
+              Date of Invoice required
+            </div>
+          </div>
+          <mat-datepicker-toggle matIconSuffix [for]="datepicker31">
+          </mat-datepicker-toggle>
+          <mat-datepicker #datepicker31>
+            <mat-datepicker-actions>
+              <button mat-raised-button color="primary" matDatepickerApply>
+                Apply
+              </button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+        </div>
+
+        <div class="col-md-2 mt-2 text-center" style="width: min-content">
+          <label>Amount</label>
+          <input
+            type="text"
+            class="border-0 border-bottom"
+            style="outline: none"
+            class="amount"
+            matInput
+            [(ngModel)]="invoice.amount"
+            placeholder="₹"
+            [ngClass]="{
+              'is-invalid': multipleSubmitted && !invoice.amount
+            }"
+          />
+
+          <div
+            *ngIf="multipleSubmitted && !invoice.amount && invoice.fileName"
+            class="invalid-feedback"
+          >
+            <div class="mb-2" *ngIf="!invoice.amount">Amount is required</div>
+          </div>
+        </div>
+        <div class="col-md-2 mt-2 text-center" style="width: min-content">
+          <span>Upload Invoice</span>
+          <label
+            for="filecontrol"
+            (click)="triggerFileUpload(i)"
+            class="file"
+            mat-raised-button=""
+            style="
+              background: rgba(62, 129, 153, 0.2);
+              color: rgba(76, 156, 219, 0.8);
+              border-radius: 2px;
+              width: max-content;
+              padding: 5px;
+            "
+          >
+            <span><img src="../../../assets/Upload_passport.svg" /> </span>
+            Browse File</label
+          >
+
+          <input
+            style="display: none"
+            [id]="i"
+            type="file"
+            name="profile"
+            enctype="multipart/form-data"
+            (change)="fileHandler($event, invoice)"
+          />
+        </div>
+        <div *ngIf="invoice.fileName">
+          <div class="invoiceCircle">
+            <div class="invoiceCross">
+              <img src="../../../assets/cross.svg" (click)="closefileName()" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+  </div>
+
+  <div class="col-md-1">
+    <button
+      mat-raised-button
+      style="min-width: auto"
+      type="button"
+      class="btn btn-primary"
+      (click)="submit()"
+    >
+      Submit
+    </button>
+  </div>
+  <div class="col-md-2">
+    <button
+      mat-raised-button
+      [mat-dialog-close]="true"
+      id="closeButton"
+      cdkFocusInitial
+    >
+      Cancel
+    </button>
+  </div>
+</div>
+
+<!-- ------------------Action button Upload invoice------------------------------------ -->
+
+<div
+  class="all_datas"
+  *ngIf="opens"
+  style="
+    height: 100%;
+    width: 93%;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: white;
+  "
+>
+  <div class="HeadDivision mt-4">
+    <div class="col-md-5">
+      <label
+        style="
+          width: 390px;
+          height: 38px;
+          display: flex;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 32px;
+          line-height: 38px;
+          color: #004761;
+        "
+        >Upload Invoice</label
+      >
+    </div>
+    <div class="flex">
+      <div class="circle">
+        <div class="cross">
+          <img src="../../../assets/cross.svg" (click)="closeForm()" />
+        </div>
+      </div>
+    </div>
+    <form [formGroup]="travelBooking" (ngSubmit)="onSubmit()">
+      <div class="row FirstDiv mt-10">
+        <label
+          style="
+            width: 1240px;
+            height: 37px;
+            background: #eaf3f6;
+            font-family: Roboto;
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 23px;
+            letter-spacing: 0em;
+            text-align: center;
+            color: #3eb0d9;
+            display: contents;
+          "
+          >Company Details</label
+        >
+      </div>
+
+      <div class="formGroup" class="flex d-flex">
+        <div class="grid-col-2">
+          <div class="mt-3">
+            <div class="row mt-1">
+              <div class="col-md-2 mt-2">
+                <mat-label>Company </mat-label>
+                <mat-form-field class="example-full-width" fxflex="75%">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="company"
+                    formControlName="company"
+                    matInput
+                    [matAutocomplete]="auto1"
+                    readonly
+                    [ngClass]="{
+                      'is-invalid': invoiceSubmitted && c['company'].errors
+                    }"
+                  />
+                  <!-- <div
+                    *ngIf="invoiceSubmitted && c['company'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div class="mb-2" *ngIf="c['company'].errors['required']">
+                      Company name required
+                    </div>
+                  </div> -->
+
+                  <button
+                    *ngIf="c['company'].value?.company_name"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="clear('company')"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                  <mat-autocomplete
+                    #auto1="matAutocomplete"
+                    (optionSelected)="onChange($event.option.value, 'company')"
+                  >
+                    <mat-option
+                      *ngFor="let option of companiesOptionC | async"
+                      [value]="option"
+                    >
+                      {{ option.company_name }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group">
+                <div class="mt-3">
+                  <div class="row mt-2">
+                    <div class="col-md-2 mt-2">
+                      <label
+                        style="
+                          font-style: normal;
+                          font-weight: 500;
+                          font-size: 14px;
+                          line-height: 16px;
+                          color: #4e99ae;
+                          margin-left: 3px;
+                        "
+                        >Name</label
+                      >
+                      <mat-form-field class="example-full-width" fxflex="75%">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="name"
+                          formControlName="name"
+                          matInput
+                          [matAutocomplete]="auto2"
+                          readonly
+                          [ngClass]="{
+                            'is-invalid': invoiceSubmitted && c['name'].errors
+                          }"
+                        />
+                        <div
+                          *ngIf="invoiceSubmitted && c['name'].errors"
+                          class="invalid-feedback"
+                        >
+                          <div
+                            class="mb-2"
+                            *ngIf="c['name'].errors['required']"
+                          >
+                            Employee Name required
+                          </div>
+                        </div>
+                        <button
+                          *ngIf="c['name'].value?.emp_name"
+                          matSuffix
+                          mat-icon-button
+                          aria-label="Clear"
+                          (click)="clear('name')"
+                        >
+                          <mat-icon>close</mat-icon>
+                        </button>
+                        <mat-autocomplete
+                          #auto2="matAutocomplete"
+                          (optionSelected)="
+                            onChange($event.option.value, 'name')
+                          "
+                        >
+                          <mat-option
+                            *ngFor="let option of eventOptionsName | async"
+                            [value]="option"
+                          >
+                            {{ option.emp_name }} {{ option.lastname }}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-2 mt-2">
+                <label
+                  style="
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 16px;
+                    color: #91999b;
+                    margin-right: 18px;
+                  "
+                  >Debited To</label
+                >
+                <mat-form-field class="example-full-width" fxflex="75%">
+                  <input
+                    type="text"
+                    class="border-0 border-bottom"
+                    style="outline: none"
+                    class="debitedTo"
+                    id="debitedTo"
+                    formControlName="debitedTo"
+                    matInput
+                    [matAutocomplete]="auto3"
+                    readonly
+                    [ngClass]="{
+                      'is-invalid': invoiceSubmitted && c['debitedTo'].errors
+                    }"
+                  />
+                  <!-- <div
+                    *ngIf="invoiceSubmitted && c['debitedTo'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div class="mb-2" *ngIf="c['debitedTo'].errors['required']">
+                      Debit to Company Required
+                    </div>
+                  </div> -->
+
+                  <button
+                    *ngIf="c['debitedTo'].value?.company_name"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="clear('debitedTo')"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+
+                  <mat-autocomplete
+                    #auto3="matAutocomplete"
+                    (optionSelected)="
+                      onChange($event.option.value, 'debitedTo')
+                    "
+                  >
+                    <mat-option
+                      *ngFor="let option of companiesOption | async"
+                      [value]="option"
+                    >
+                      {{ option.company_name }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2 mt-2">
+                <label
+                  style="
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 16px;
+                    color: #91999b;
+                    margin-right: 18px;
+                  "
+                  >Authorised By</label
+                >
+                <mat-form-field class="example-full-width" fxflex="75%">
+                  <input
+                    type="text"
+                    class="border-0 border-bottom"
+                    style="outline: none"
+                    class="authorisedBy"
+                    formControlName="authorisedBy"
+                    matInput
+                    readonly
+                    [ngClass]="{
+                      'is-invalid': invoiceSubmitted && c['authorisedBy'].errors
+                    }"
+                  />
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2 mt-2">
+                <label
+                  style="
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 16px;
+                    color: #91999b;
+                    margin-right: 18px;
+                  "
+                  >Passed To</label
+                >
+
+                <mat-form-field class="example-full-width" fxflex="75%">
+                  <input
+                    type="text"
+                    class="border-0 border-bottom"
+                    style="outline: none"
+                    class="PassedTo"
+                    formControlName="PassedTo"
+                    matInput
+                    readonly
+                    [ngClass]="{
+                      'is-invalid': invoiceSubmitted && c['PassedTo'].errors
+                    }"
+                  />
+                  <!-- <div *ngIf="invoiceSubmitted && c['PassedTo'].errors" class="invalid-feedback">
+                   <div *ngIf="c['PassedTo'].errors['required']">Passed to is required</div>
+                   </div> -->
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="ThirdDiv col-md-2 ps-2 mt-10 mb-10">
+              <label
+                style="
+                  width: 1200px;
+                  height: 37px;
+                  background: #eaf3f6;
+                  font-size: 20px;
+                  font-weight: 500;
+                  line-height: 23px;
+                  letter-spacing: 0em;
+                  text-align: center;
+                  color: #58a7c3;
+                  display: contents;
+                "
+              >
+                Travel Details
+              </label>
+            </div>
+
+            <div class="form-group mt-10">
+              <mat-form-field>
+                <mat-select
+                  formControlName="travelDetails"
+                  placeholder="Select"
+                >
+                  <!-- <span class=" flex d-flex" *ngIf="c['travelDetails'].value==='Air'"> <img src="../../../assets/Air.svg" > </span> -->
+                  <mat-option value="Air">
+                    <img src="../../../assets/Air.svg" />Air</mat-option
+                  >
+                  <mat-option value="Hotel"
+                    ><img src="../../../assets/Hotel.svg" />Hotel</mat-option
+                  >
+                  <mat-option value="Taxi"
+                    ><img src="../../../assets/Travel.svg" />Taxi</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="form-group">
+              <div class="FourthDiv ps-2 mt-2">
+                <label
+                  style="
+                    width: 1200px;
+                    height: 37px;
+                    background: #eaf3f6;
+                    font-size: 20px;
+                    font-weight: 500;
+                    line-height: 23px;
+                    letter-spacing: 0em;
+                    text-align: center;
+                    color: #58a7c3;
+                    display: contents;
+                  "
+                  >Travel Details</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- -------------------------------------AIR BOOKING---------------------------------------- -->
+          <div class="flex d-flex">
+            <div class="row ps-2" *ngIf="c['travelDetails']?.value === 'Air'">
+              <div class="col-md-2 mt-2 form-group">
+                <mat-label>From </mat-label>
+                <mat-form-field class="example-full-width" fxflex="75%">
+                  <input
+                    id="mat-datepicker-input"
+                    type="text"
+                    matInput
+                    formControlName="fromAir"
+                    [matAutocomplete]="auto10"
+                    readonly
+                    [ngClass]="{
+                      'is-invalid': invoiceSubmitted && c['fromAir'].errors
+                    }"
+                  />
+                  <div
+                    *ngIf="invoiceSubmitted && c['fromAir'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="c['fromAir'].errors['required']">
+                      Travel From required
+                    </div>
+                  </div>
+                  <button
+                    *ngIf="c['fromAir'].value?.city_name"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="clear('fromAir')"
+                  >
+                    <mat-icon class="mat-icon">close</mat-icon>
+                  </button>
+                  <mat-autocomplete
+                    #auto10="matAutocomplete"
+                    (optionSelected)="onChange($event.option.value, 'fromAir')"
+                  >
+                    <mat-option
+                      *ngFor="let option of airportOption | async"
+                      [value]="option"
+                    >
+                      {{ option.iata_code }} ( {{ option.airport_name }} )
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2 mt-2 ps-2 form-group">
+                <mat-label>To </mat-label>
+                <mat-form-field class="example-full-width" fxflex="75%">
+                  <input
+                    id="mat-datepicker-input"
+                    type="text"
+                    matInput
+                    formControlName="toAir"
+                    [matAutocomplete]="auto8"
+                    readonly
+                    [ngClass]="{
+                      'is-invalid': invoiceSubmitted && c['toAir'].errors
+                    }"
+                  />
+                  <div
+                    *ngIf="invoiceSubmitted && c['toAir'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="c['toAir'].errors['required']">
+                      Travel To required
+                    </div>
+                  </div>
+                  <button
+                    *ngIf="c['toAir'].value?.city_name"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="clear('toAir')"
+                  >
+                    <mat-icon class="mat-icon">close</mat-icon>
+                  </button>
+                  <mat-autocomplete
+                    #auto8="matAutocomplete"
+                    (optionSelected)="onChange($event.option.value, 'toAir')"
+                  >
+                    <mat-option
+                      *ngFor="let option of airportOptionTo | async"
+                      [value]="option"
+                    >
+                      {{ option.iata_code }} ( {{ option.airport_name }} )
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2 mt-2 ps-2 form-group">
+                <mat-label> Date of Departure </mat-label>
+                <mat-form-field class="example-form-field" fxflex="75%">
+                  <input
+                    type="text"
+                    matInput
+                    formControlName="departure"
+                    [matDatepicker]="datepicker1"
+                    [min]="c['booking'].value"
+                    placeholder="Select"
+                    readonly
+                    [ngClass]="{
+                      'is-invalid': invoiceSubmitted && c['departure'].errors
+                    }"
+                  />
+                  <div
+                    *ngIf="invoiceSubmitted && c['departure'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="c['departure'].errors['required']">
+                      Departure Date required
+                    </div>
+                  </div>
+                  <button
+                    *ngIf="c['departure'].value"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="clear('departure')"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                  <mat-datepicker-toggle
+                    *ngIf="!c['departure']?.value"
+                    matIconSuffix
+                    [for]="datepicker1"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #datepicker1>
+                    <mat-datepicker-actions>
+                      <!-- <button mat-button matDatepickerCancel>Cancel</button> -->
+                      <button
+                        mat-raised-button
+                        color="primary"
+                        matDatepickerApply
+                      >
+                        Apply
+                      </button>
+                    </mat-datepicker-actions>
+                  </mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2 mt-2 form-group">
+                <mat-label> Date of Return </mat-label>
+
+                <mat-form-field class="example-form-field" fxflex="75%">
+                  <input
+                    type="text"
+                    matInput
+                    formControlName="return"
+                    [matDatepicker]="datepicker2"
+                    [min]="c['departure'].value"
+                    placeholder="Select"
+                    readonly
+                    [ngClass]="{
+                      'is-invalid': invoiceSubmitted && c['departure'].errors
+                    }"
+                  />
+                  <div
+                    *ngIf="invoiceSubmitted && c['return'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="c['return'].errors['required']">
+                      Return Date required
+                    </div>
+                  </div>
+
+                  <button
+                    *ngIf="c['return'].value"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="clear('return')"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                  <mat-datepicker-toggle
+                    *ngIf="!c['return']?.value"
+                    matIconSuffix
+                    [for]="datepicker2"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #datepicker2>
+                    <mat-datepicker-actions>
+                      <!-- <button mat-button matDatepickerCancel>Cancel</button> -->
+                      <button
+                        mat-raised-button
+                        color="primary"
+                        matDatepickerApply
+                      >
+                        Apply
+                      </button>
+                    </mat-datepicker-actions>
+                  </mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2 mt-2 form-group">
+                <mat-label>Vendor </mat-label>
+                <mat-form-field class="example-full-width" fxflex="75%">
+                  <input
+                    id="vendor"
+                    type="text"
+                    matInput
+                    formControlName="vendor"
+                    [matAutocomplete]="auto7"
+                    [ngClass]="{
+                      'is-invalid': invoiceSubmitted && c['vendor'].errors
+                    }"
+                  />
+                  <div
+                    *ngIf="invoiceSubmitted && c['vendor'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div class="mb-1" *ngIf="c['vendor'].errors['required']">
+                      Vendor Name required
+                    </div>
+                  </div>
+                  <button
+                    *ngIf="c['vendor'].value?.airline_name"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="clear('vendor')"
+                  >
+                    <mat-icon class="mat-icon">close</mat-icon>
+                  </button>
+                  <mat-autocomplete
+                    #auto7="matAutocomplete"
+                    (optionSelected)="onChange($event.option.value, 'vendor')"
+                  >
+                    <mat-option
+                      *ngFor="let option of vendorOption | async"
+                      [value]="option"
+                    >
+                      {{ option.airline_name }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!-- ------------------------------------HOTEL BOOKING----------------------------------------- -->
+
+            <div class="row" *ngIf="c['travelDetails']?.value === 'Hotel'">
+              <div class="col-md-2 mt-2 form-group">
+                <mat-label>City</mat-label>
+                <mat-form-field class="example-full-width" fxflex="75%">
+                  <input
+                    id="mat-datepicker-input"
+                    type="text"
+                    matInput
+                    formControlName="city"
+                    [matAutocomplete]="auto21"
+                    [ngClass]="{
+                      'is-invalid': invoiceSubmitted && c['city'].errors
+                    }"
+                  />
+                  <!-- <div
+                    *ngIf="invoiceSubmitted && c['city'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="c['city'].errors['required']">
+                      City is required
+                    </div>
+                  </div> -->
+                  <button
+                    *ngIf="c['city'].value?.city"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="clear('city')"
+                  >
+                    <mat-icon class="mat-icon">close</mat-icon>
+                  </button>
+                  <mat-autocomplete
+                    #auto21="matAutocomplete"
+                    (optionSelected)="onChange($event.option.value, 'city')"
+                  >
+                    <mat-option
+                      *ngFor="let option of cityOption | async"
+                      [value]="option"
+                    >
+                      {{ option.city }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2 mt-2 form-group">
+                <mat-label>Hotel </mat-label>
+                <mat-form-field class="example-full-width" fxflex="75%">
+                  <input
+                    id="mat-datepicker-input"
+                    type="text"
+                    matInput
+                    formControlName="hotel"
+                    [matAutocomplete]="auto22"
+                    [ngClass]="{
+                      'is-invalid': invoiceSubmitted && c['hotel'].errors
+                    }"
+                  />
+                  <!-- <div
+                    *ngIf="invoiceSubmitted && c['hotel'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="c['hotel'].errors['required']">
+                      Hotel Name required
+                    </div>
+                  </div> -->
+                  <button
+                    *ngIf="c['hotel'].value?.hotel_name"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="clear('hotel')"
+                  >
+                    <mat-icon class="mat-icon">close</mat-icon>
+                  </button>
+                  <mat-autocomplete
+                    #auto22="matAutocomplete"
+                    (optionSelected)="onChange($event.option.value, 'hotel')"
+                  >
+                    <mat-option
+                      *ngFor="let option of hotelOption | async"
+                      [value]="option"
+                    >
+                      {{ option.hotel_name }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2 mt-2 form-group">
+                <mat-label> Check-In </mat-label>
+
+                <mat-form-field class="example-form-field" fxflex="75%">
+                  <input
+                    type="text"
+                    matInput
+                    formControlName="checkin"
+                    [matDatepicker]="datepicker5"
+                    [min]="c['hotelbooking'].value"
+                    placeholder="Select"
+                    [ngClass]="{
+                      'is-invalid': invoiceSubmitted && c['checkin'].errors
+                    }"
+                  />
+                  <!-- <div
+                    *ngIf="invoiceSubmitted && c['checkin'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="c['checkin'].errors['required']">
+                      Check-in date required
+                    </div>
+                  </div> -->
+                  <button
+                    *ngIf="c['checkin'].value"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="clear('checkin')"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                  <mat-datepicker-toggle
+                    *ngIf="!c['checkin']?.value"
+                    matIconSuffix
+                    [for]="datepicker5"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #datepicker5>
+                    <mat-datepicker-actions>
+                      <button
+                        mat-raised-button
+                        color="primary"
+                        matDatepickerApply
+                      >
+                        Apply
+                      </button>
+                    </mat-datepicker-actions>
+                  </mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2 mt-2 form-group">
+                <mat-label> Check-Out</mat-label>
+
+                <mat-form-field class="example-form-field" fxflex="75%">
+                  <input
+                    type="text"
+                    matInput
+                    formControlName="checkOut"
+                    [matDatepicker]="datepicker6"
+                    [min]="c['checkin'].value"
+                    placeholder="Select"
+                    [ngClass]="{
+                      'is-invalid': invoiceSubmitted && c['checkOut'].errors
+                    }"
+                  />
+                  <!-- <div
+                    *ngIf="invoiceSubmitted && c['checkOut'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="c['checkOut'].errors['required']">
+                      Check-in date required
+                    </div>
+                  </div> -->
+                  <button
+                    *ngIf="c['checkOut'].value"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="clear('checkOut')"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                  <mat-datepicker-toggle
+                    *ngIf="!c['checkOut']?.value"
+                    matIconSuffix
+                    [for]="datepicker6"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #datepicker6>
+                    <mat-datepicker-actions>
+                      <button
+                        mat-raised-button
+                        color="primary"
+                        matDatepickerApply
+                      >
+                        Apply
+                      </button>
+                    </mat-datepicker-actions>
+                  </mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- ---------------------------------------TAXI BOOKING--------------------------------------------------- -->
+
+            <div class="row" *ngIf="c['travelDetails']?.value === 'Taxi'">
+              <div class="col-md-2 mt-2 form-group">
+                <label
+                  style="
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 16px;
+                    color: #91999b;
+                    margin-right: 18px;
+                  "
+                  >From</label
+                >
+
+                <mat-form-field class="example-full-width" fxflex="75%">
+                  <input
+                    type="text"
+                    class="border-0 border-bottom"
+                    style="outline: none"
+                    class="fromTaxi"
+                    formControlName="fromTaxi"
+                    matInput
+                    [ngClass]="{
+                      'is-invalid': invoiceSubmitted && c['fromTaxi'].errors
+                    }"
+                  />
+                  <!-- <div
+                    *ngIf="invoiceSubmitted && c['fromTaxi'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="c['fromTaxi'].errors['required']">
+                      From Field required
+                    </div>
+                  </div> -->
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2 mt-2 form-group">
+                <label
+                  style="
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 16px;
+                    color: #91999b;
+                    margin-right: 18px;
+                  "
+                  >To</label
+                >
+
+                <mat-form-field class="example-full-width" fxflex="75%">
+                  <input
+                    type="text"
+                    class="border-0 border-bottom"
+                    style="outline: none"
+                    class="toTaxi"
+                    formControlName="toTaxi"
+                    matInput
+                    [ngClass]="{
+                      'is-invalid': invoiceSubmitted && c['toTaxi'].errors
+                    }"
+                  />
+                  <!-- <div
+                    *ngIf="invoiceSubmitted && c['toTaxi'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="c['toTaxi'].errors['required']">
+                      To Field required
+                    </div>
+                  </div> -->
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2 mt-2 form-group">
+                <mat-label> Reporting Date</mat-label>
+
+                <mat-form-field class="example-form-field" fxflex="75%">
+                  <input
+                    type="text"
+                    matInput
+                    formControlName="reportingDate"
+                    [matDatepicker]="datepicker25"
+                    placeholder="Select"
+                    [ngClass]="{
+                      'is-invalid':
+                        invoiceSubmitted && c['reportingDate'].errors
+                    }"
+                  />
+                  <!-- <div
+                    *ngIf="invoiceSubmitted && c['reportingDate'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="c['reportingDate'].errors['required']">
+                      Reporting date required
+                    </div>
+                  </div> -->
+                  <button
+                    *ngIf="c['reportingDate'].value"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="clear('reportingDate')"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                  <mat-datepicker-toggle
+                    *ngIf="!c['reportingDate']?.value"
+                    matIconSuffix
+                    [for]="datepicker25"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #datepicker25>
+                    <mat-datepicker-actions>
+                      <button
+                        mat-raised-button
+                        color="primary"
+                        matDatepickerApply
+                      >
+                        Apply
+                      </button>
+                    </mat-datepicker-actions>
+                  </mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2 mt-2 form-group">
+                <mat-label> Reporting Time</mat-label>
+                <mat-form-field appearance="fill">
+                  <!-- <mat-label>TIME</mat-label> -->
+                  <div class="flex d-flex">
+                    <a> <img src="../../../assets/time.svg" /></a>
+                  </div>
+                  <input
+                    type="text"
+                    [ngxTimepicker]="picker"
+                    matInput
+                    formControlName="reportingTime"
+                    placeholder="Select"
+                    [ngClass]="{
+                      'is-invalid':
+                        invoiceSubmitted && c['reportingTime'].errors
+                    }"
+                  />
+                  <ngx-material-timepicker #picker> </ngx-material-timepicker>
+                  <!-- <div
+                    *ngIf="invoiceSubmitted && c['reportingTime'].errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="c['reportingTime'].errors['required']">
+                      Reporting Time required
+                    </div>
+                  </div> -->
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2 mt-2 form-group">
+                <label
+                  style="
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 16px;
+                    color: #91999b;
+                    margin-right: 18px;
+                  "
+                  >Taxi Type</label
+                >
+
+                <mat-form-field class="example-full-width" fxflex="75%">
+                  <input
+                    type="text"
+                    class="border-0 border-bottom"
+                    style="outline: none"
+                    class="carType"
+                    formControlName="carType"
+                    matInput
+                    [ngClass]="{
+                      'is-invalid': invoiceSubmitted && c['carType'].errors
+                    }"
+                  />
+                  <div
+                    *ngIf="invoiceSubmitted && c['carType'].errors"
+                    class="invalid-feedback"
+                  >
+                    <!-- <div *ngIf="c['carType'].errors['required']">From is required</div> -->
+                  </div>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <!-- -----------------------------------INVOICE DETAILS----------------------------------- -->
+
+          <div class="row mt-4">
+            <div class="ps-2 FourthDiv flex d-flex">
+              <label
+                style="
+                  width: 1200px;
+                  height: 37px;
+                  background: #eaf3f6;
+                  font-size: 20px;
+                  font-weight: 500;
+                  line-height: 23px;
+                  letter-spacing: 0em;
+                  text-align: center;
+                  color: #58a7c3;
+                  display: contents;
+                "
+                >Invoice Details</label
+              >
+            </div>
+            <div class="col-md-2 mt-2 form-group">
+              <mat-label> Invoice Recieved Date </mat-label>
+
+              <mat-form-field class="example-form-field" fxflex="75%">
+                <input
+                  type="text"
+                  matInput
+                  formControlName="invoiceRecievedDate"
+                  [matDatepicker]="datepicker51"
+                  placeholder="Select"
+                  [ngClass]="{
+                    'is-invalid':
+                      invoiceSubmitted && c['invoiceRecievedDate'].errors
+                  }"
+                />
+                <div
+                  *ngIf="invoiceSubmitted && c['invoiceRecievedDate'].errors"
+                  class="invalid-feedback"
+                >
+                  <div
+                    class="mb-0"
+                    *ngIf="c['invoiceRecievedDate'].errors['required']"
+                  >
+                    Invoice Recieved date required
+                  </div>
+                </div>
+                <button
+                  *ngIf="c['invoiceRecievedDate'].value"
+                  matSuffix
+                  mat-icon-button
+                  aria-label="Clear"
+                  (click)="clear('invoiceRecievedDate')"
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+                <mat-datepicker-toggle
+                  *ngIf="!c['invoiceRecievedDate']?.value"
+                  matIconSuffix
+                  [for]="datepicker51"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #datepicker51>
+                  <mat-datepicker-actions>
+                    <button mat-button matDatepickerCancel>Cancel</button>
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      matDatepickerApply
+                    >
+                      Apply
+                    </button>
+                  </mat-datepicker-actions>
+                </mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-2 mt-2 form-group">
+              <mat-label> Invoice Date</mat-label>
+
+              <mat-form-field class="example-form-field" fxflex="75%">
+                <input
+                  type="text"
+                  matInput
+                  formControlName="invoiceDate"
+                  [matDatepicker]="datepicker52"
+                  placeholder="Select"
+                  [ngClass]="{
+                    'is-invalid': invoiceSubmitted && c['invoiceDate'].errors
+                  }"
+                />
+                <div
+                  *ngIf="invoiceSubmitted && c['invoiceDate'].errors"
+                  class="invalid-feedback"
+                >
+                  <div class="mb-1" *ngIf="c['invoiceDate'].errors['required']">
+                    Invoice date required
+                  </div>
+                </div>
+                <button
+                  *ngIf="c['invoiceDate'].value"
+                  matSuffix
+                  mat-icon-button
+                  aria-label="Clear"
+                  (click)="clear('invoiceDate')"
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+                <mat-datepicker-toggle
+                  *ngIf="!c['invoiceDate']?.value"
+                  matIconSuffix
+                  [for]="datepicker52"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #datepicker52>
+                  <mat-datepicker-actions>
+                    <button mat-button matDatepickerCancel>Cancel</button>
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      matDatepickerApply
+                    >
+                      Apply
+                    </button>
+                  </mat-datepicker-actions>
+                </mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-2 mt-2 form-group">
+              <mat-label> Date Sent to Accounts </mat-label>
+
+              <mat-form-field class="example-form-field" fxflex="75%">
+                <input
+                  type="text"
+                  matInput
+                  formControlName="dateSentToAccounts"
+                  [matDatepicker]="datepicker53"
+                  placeholder="Select"
+                  [ngClass]="{
+                    'is-invalid':
+                      invoiceSubmitted && c['dateSentToAccounts'].errors
+                  }"
+                />
+                <div
+                  *ngIf="invoiceSubmitted && c['dateSentToAccounts'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="c['dateSentToAccounts'].errors['required']">
+                    Date Sent To Accounts Required
+                  </div>
+                </div>
+                <button
+                  *ngIf="c['dateSentToAccounts'].value"
+                  matSuffix
+                  mat-icon-button
+                  aria-label="Clear"
+                  (click)="clear('dateSentToAccounts')"
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+                <mat-datepicker-toggle
+                  *ngIf="!c['dateSentToAccounts']?.value"
+                  matIconSuffix
+                  [for]="datepicker53"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #datepicker53>
+                  <mat-datepicker-actions>
+                    <button mat-button matDatepickerCancel>Cancel</button>
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      matDatepickerApply
+                    >
+                      Apply
+                    </button>
+                  </mat-datepicker-actions>
+                </mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="flex row col-md-2 mt-2 form-group">
+              <label
+                style="
+                  font-style: normal;
+                  font-weight: 500;
+                  font-size: 14px;
+                  line-height: 16px;
+                  color: #91999b;
+                  margin-right: 18px;
+                "
+                >Credit Note</label
+              >
+
+              <mat-form-field class="example-full-width" fxflex="75%">
+                <input
+                  type="text"
+                  class="border-0 border-bottom"
+                  style="outline: none"
+                  class="creditNote"
+                  formControlName="creditNote"
+                  matInput
+                  [ngClass]="{
+                    'is-invalid': invoiceSubmitted && c['creditNote'].errors
+                  }"
+                />
+                <div
+                  *ngIf="invoiceSubmitted && c['creditNote'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="c['creditNote'].errors['required']">
+                    Credit Note Required
+                  </div>
+                </div>
+              </mat-form-field>
+            </div>
+            <div class="flex row col-md-2 mt-2 form-group">
+              <label
+                style="
+                  font-style: normal;
+                  font-weight: 500;
+                  font-size: 14px;
+                  line-height: 16px;
+                  color: #91999b;
+                  margin-right: 18px;
+                "
+                >Credit Note Number</label
+              >
+
+              <mat-form-field class="example-full-width" fxflex="75%">
+                <input
+                  type="text"
+                  class="border-0 border-bottom"
+                  style="outline: none"
+                  class="creditNoteNumber"
+                  formControlName="creditNoteNumber"
+                  matInput
+                  [ngClass]="{
+                    'is-invalid':
+                      invoiceSubmitted && c['creditNoteNumber'].errors
+                  }"
+                />
+                <div
+                  *ngIf="invoiceSubmitted && c['creditNoteNumber'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="c['creditNoteNumber'].errors['required']">
+                    Credit Note Required
+                  </div>
+                </div>
+              </mat-form-field>
+            </div>
+            <div class="flex row col-md-2 mt-2 form-group">
+              <label
+                style="
+                  font-style: normal;
+                  font-weight: 500;
+                  font-size: 14px;
+                  line-height: 16px;
+                  color: #91999b;
+                  margin-right: 18px;
+                "
+                >Refund Amount</label
+              >
+
+              <mat-form-field class="example-full-width" fxflex="75%">
+                <input
+                  type="text"
+                  class="border-0 border-bottom"
+                  style="outline: none"
+                  class="refundAmount"
+                  formControlName="refundAmount"
+                  matInput
+                  [ngClass]="{
+                    'is-invalid': invoiceSubmitted && c['refundAmount'].errors
+                  }"
+                />
+                <div
+                  *ngIf="invoiceSubmitted && c['refundAmount'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="c['refundAmount'].errors['required']">
+                    Refund Amount Required
+                  </div>
+                </div>
+              </mat-form-field>
+            </div>
+            <div class="flex row col-md-2 mt-2 form-group">
+              <label
+                style="
+                  font-style: normal;
+                  font-weight: 500;
+                  font-size: 14px;
+                  line-height: 16px;
+                  color: #91999b;
+                  margin-right: 18px;
+                "
+                >Statement</label
+              >
+
+              <mat-form-field class="example-full-width" fxflex="75%">
+                <input
+                  type="text"
+                  class="border-0 border-bottom"
+                  style="outline: none"
+                  class="statement"
+                  formControlName="statement"
+                  matInput
+                  [ngClass]="{
+                    'is-invalid': invoiceSubmitted && c['statement'].errors
+                  }"
+                />
+                <div
+                  *ngIf="invoiceSubmitted && c['statement'].errors"
+                  class="invalid-feedback"
+                >
+                  <div class="mb-1" *ngIf="c['statement'].errors['required']">
+                    Statement Required
+                  </div>
+                </div>
+              </mat-form-field>
+            </div>
+            <div class="flex row col-md-2 mt-2 form-group">
+              <label
+                style="
+                  font-style: normal;
+                  font-weight: 500;
+                  font-size: 14px;
+                  line-height: 16px;
+                  color: #91999b;
+                  margin-right: 18px;
+                "
+                >Invoice Number</label
+              >
+
+              <mat-form-field class="example-full-width" fxflex="75%">
+                <input
+                  type="text"
+                  class="border-0 border-bottom"
+                  style="outline: none"
+                  class="invoiceNumber"
+                  formControlName="invoiceNumber"
+                  matInput
+                  [ngClass]="{
+                    'is-invalid': invoiceSubmitted && c['invoiceNumber'].errors
+                  }"
+                />
+                <div
+                  *ngIf="invoiceSubmitted && c['invoiceNumber'].errors"
+                  class="invalid-feedback"
+                >
+                  <div
+                    class="mb-2"
+                    *ngIf="c['invoiceNumber'].errors['required']"
+                  >
+                    Invoice Number Required
+                  </div>
+                </div>
+              </mat-form-field>
+            </div>
+            <div class="flex row col-md-2 mt-2 form-group">
+              <label
+                style="
+                  font-style: normal;
+                  font-weight: 500;
+                  font-size: 14px;
+                  line-height: 16px;
+                  color: #91999b;
+                  margin-right: 18px;
+                "
+                >Forward To</label
+              >
+
+              <mat-form-field class="example-full-width" fxflex="75%">
+                <input
+                  type="text"
+                  class="border-0 border-bottom"
+                  style="outline: none"
+                  class="forwardTo"
+                  formControlName="forwardTo"
+                  matInput
+                  [ngClass]="{
+                    'is-invalid': invoiceSubmitted && c['forwardTo'].errors
+                  }"
+                />
+                <div
+                  *ngIf="invoiceSubmitted && c['forwardTo'].errors"
+                  class="invalid-feedback"
+                >
+                  <div class="mb-2" *ngIf="c['forwardTo'].errors['required']">
+                    Forward To Required
+                  </div>
+                </div>
+              </mat-form-field>
+            </div>
+
+            <div class="flex row col-md-2 mt-2 form-group">
+              <label
+                style="
+                  font-style: normal;
+                  font-weight: 500;
+                  font-size: 14px;
+                  line-height: 16px;
+                  color: #91999b;
+                  margin-right: 18px;
+                "
+                >Invoice Amount</label
+              >
+
+              <mat-form-field class="example-full-width" fxflex="75%">
+                <input
+                  type="text"
+                  class="border-0 border-bottom"
+                  style="outline: none"
+                  class="forwardTo"
+                  formControlName="invoiceAmountINR"
+                  matInput
+                  [ngClass]="{
+                    'is-invalid':
+                      invoiceSubmitted && c['invoiceAmountINR'].errors
+                  }"
+                />
+                <div
+                  *ngIf="invoiceSubmitted && c['invoiceAmountINR'].errors"
+                  class="invalid-feedback"
+                >
+                  <div
+                    class="mb-2"
+                    *ngIf="c['invoiceAmountINR'].errors['required']"
+                  >
+                    Invoice amount Required
+                  </div>
+                </div>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-2 mt-2 text-center">
+              <label for="filecontrol">Browse Invoice</label>
+              <input
+                type="file"
+                name="profile"
+                style="background-color: #cae3ec"
+                enctype="multipart/form-data"
+                name="file"
+                (change)="onFileSelected($event)"
+                formControlName="browseInvoice"
+                [ngClass]="{
+                  'is-invalid': invoiceSubmitted && c['browseInvoice'].errors
+                }"
+              />
+              <div
+                *ngIf="invoiceSubmitted && c['browseInvoice'].errors"
+                class="invalid-feedback"
+              >
+                <div class="mb-2" *ngIf="c['browseInvoice'].errors['required']">
+                  File Required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

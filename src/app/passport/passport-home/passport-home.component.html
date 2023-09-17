@@ -1,0 +1,423 @@
+<div class="HeadDivision">
+  <div class="row">
+    <div class="col-md-10">
+      <div class="FirstDiv">
+        <label
+          style="
+            width: 297px;
+            height: 47px;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 30px;
+            line-height: 47px;
+            color: #283b42;
+            margin-left: 23px;
+          "
+          >Passport Details</label
+        >
+      </div>
+    </div>
+
+    <div class="col-md-2 pt-2 mt-2 pb-2">
+      <button
+        class="border-0 text-white"
+        style="
+          background-color: #004761;
+          text-align: center;
+          background-color: #004761;
+          padding-left: 15px;
+          border: 40px;
+          height: 37px;
+          color: #e2f5fb;
+          border: none;
+
+          width: 161px;
+          border-radius: 10px;
+        "
+        (click)="openPassenger()"
+      >
+        <img
+          src="../../../assets/addPassport.svg"
+          style="
+            margin-right: 10px;
+            left: 89.2%;
+            right: 10.12%;
+            top: 13.65%;
+            bottom: 85.28%;
+          "
+        />
+
+        New Passport
+      </button>
+    </div>
+  </div>
+
+  <div class="SecondDiv border mt-3 ps-5">
+    <div class="row">
+      <div class="col-md-2 mt-2">
+        <div>
+          <mat-label class="passport_input">Company</mat-label>
+          <mat-form-field class="passport" appearance="outline">
+            <input
+              type="text"
+              matInput
+              [formControl]="company"
+              [matAutocomplete]="auto1"
+            />
+            <button
+              *ngIf="company.value?.company_name"
+              matSuffix
+              mat-icon-button
+              aria-label="Clear"
+              (click)="clear(company)"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+            <mat-autocomplete
+              #auto1="matAutocomplete"
+              [displayWith]="displayFn"
+            >
+              <mat-option
+                *ngFor="let option of companiesOptionC | async"
+                [value]="option"
+              >
+                {{ option.company_name }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- <div class="col-md-2 mt-2">
+        <mat-form-field class="example-full-width">
+          <label>Company Name</label>
+          <input
+            type="text"
+            matInput
+            [formControl]="company"
+            [matAutocomplete]="auto1"
+            style="
+              background-color: white;
+              color: black;
+              border-radius: 15px;
+              width: 100px;
+              border: 1px;
+              height: 15px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+            name="passPortSearch"
+          />
+          <button
+            *ngIf="company.value?.company_name"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="clear(company)"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn">
+            <mat-option
+              *ngFor="let option of companiesOptionC | async"
+              [value]="option"
+            >
+              {{ option.company_name }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div> -->
+
+      <div class="col-md-2 mt-2">
+        <mat-label class="passport_input"> Name</mat-label>
+        <mat-form-field class="passport" appearance="outline">
+          <input
+            type="text"
+            id="name"
+            [formControl]="name"
+            matInput
+            [matAutocomplete]="auto2"
+          />
+
+          <button
+            *ngIf="name.value?.emp_name"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="clear(name)"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-autocomplete
+            #auto2="matAutocomplete"
+            [displayWith]="displayNames"
+          >
+            <mat-option
+              *ngFor="let option of nameOption | async"
+              [value]="option"
+            >
+              {{ option.emp_name }} {{ option.lastname }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+
+      <!-- <div class="col-md-2 mt-2">
+        <label style="margin-left: 25px">Employee Name</label>
+        <div class="">
+          <input
+            type="text mt-2"
+            style="
+              background-color: white;
+              color: black;
+              border-radius: 15px;
+              width: 170px;
+              border: 1px;
+              height: 35px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-left: 20px;
+            "
+            name="passPortSearch"
+          />
+        </div>
+      </div> -->
+
+      <div class="col-md-2 mt-2">
+        <label class="passport_Number">Passport Number</label>
+        <mat-form-field class="passport" appearance="outline">
+          <input
+            type="text"
+            class="border-0 border-bottom"
+            style="outline: none"
+            class="passportNumber"
+            [formControl]="passportNumber"
+            matInput
+          />
+        </mat-form-field>
+      </div>
+      <!-- <div class="col-md-2 mt-2">
+        <label style="margin-left: 53px">Passport Number</label>
+        <input
+          type="text mt-2"
+          style="
+            background-color: white;
+            color: black;
+            border-radius: 15px;
+            width: 150px;
+            border: 1px;
+            height: 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-left: 50px;
+          "
+          name="passPortSearch"
+        />
+      </div> -->
+
+      <div class="col-md-2 mt-2">
+        <div class="dropdown-col">
+          <mat-label class="passport_input">Status</mat-label>
+
+          <mat-form-field class="passport" appearance="outline">
+            <input
+              type="text"
+              matInput
+              [formControl]="passportStatus"
+              [matAutocomplete]="auto5"
+            />
+            <button
+              *ngIf="passportStatus?.value"
+              matSuffix
+              mat-icon-button
+              aria-label="Clear"
+              (click)="clear(passportStatus)"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+            <mat-autocomplete #auto5="matAutocomplete">
+              <mat-option *ngFor="let option of typesStatus" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div
+        class="col-md-4 mt-2"
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        "
+      >
+        <div class="dropdown-col position-realtive w-10">
+          <mat-label class="passport_date">Date Of Issue</mat-label>
+
+          <mat-form-field class="passport" appearance="outline">
+            <input
+              type="text"
+              matInput
+              [formControl]="dateOfIssue"
+              [matDatepicker]="datepicker40"
+              placeholder="Select"
+            />
+            <button
+              *ngIf="dateOfIssue?.value"
+              matSuffix
+              mat-icon-button
+              aria-label="Clear"
+              (click)="clear(dateOfIssue)"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+            <mat-datepicker-toggle
+              *ngIf="!dateOfIssue?.value"
+              matIconSuffix
+              [for]="datepicker40"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #datepicker40>
+              <mat-datepicker-actions>
+                <button mat-button matDatepickerCancel>Cancel</button>
+                <button mat-raised-button color="primary" matDatepickerApply>
+                  Apply
+                </button>
+              </mat-datepicker-actions>
+            </mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="dropdown-col position-realtive w-10">
+          <mat-label class="passport_date">Date Of Expiry</mat-label>
+
+          <mat-form-field class="passport" appearance="outline">
+            <input
+              type="text"
+              matInput
+              [formControl]="dateOfExpiry"
+              [matDatepicker]="datepicker41"
+              placeholder="Select"
+            />
+            <button
+              *ngIf="dateOfExpiry?.value"
+              matSuffix
+              mat-icon-button
+              aria-label="Clear"
+              (click)="clear(dateOfExpiry)"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+            <mat-datepicker-toggle
+              *ngIf="!dateOfExpiry?.value"
+              matIconSuffix
+              [for]="datepicker41"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #datepicker41>
+              <mat-datepicker-actions>
+                <button mat-button matDatepickerCancel>Cancel</button>
+                <button mat-raised-button color="primary" matDatepickerApply>
+                  Apply
+                </button>
+              </mat-datepicker-actions>
+            </mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="searchButtons mb-3">
+          <button
+            class="btnsSearch mt-2"
+            style="margin-left: 20px"
+            (click)="search()"
+          >
+            <img src="../../../assets/search_icon.svg" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-6"></div>
+      <div class="col-md-6" style="padding: 25px; padding-left: 300px">
+        <button class="excelButtons mx-4" (click)="downloadExcel()">
+          Export Excel
+
+          <img src="../../../assets/Excell.svg " class="px-2" />
+        </button>
+        <button class="excelButtons" (click)="downloadPdf()">
+          Export PDF
+          <img src="../../../assets/Pdf.svg" class="px-3" />
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="ps-3" style="width: 1285px; border-radius: 16px">
+    <table class="table border">
+      <thead>
+        <tr style="background: #f9f9f9; border-radius: 16px">
+          <th scope="col">Company</th>
+          <th scope="col">Employee Name</th>
+          <th scope="col">Passport Number</th>
+          <th scope="col">Date of Issue</th>
+          <th scope="col">Date of Expiry</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Boxco Shipping Services Pvt. Ltd.</th>
+          <td>Girish Wagle</td>
+          <td>120000</td>
+          <td>01-05-2023</td>
+          <td>24-05-2023</td>
+          <td>
+            <button
+              style="
+                border: none;
+                background: #a2d6ea;
+                border-radius: 7px;
+                width: 94px;
+                color: #0f7aa0;
+              "
+            >
+              Valid
+            </button>
+          </td>
+          <td>
+            <button style="border: none; background-color: white">
+              <img src="../../../assets/Edit_invoice.svg" />
+            </button>
+            <button style="border: none; background-color: white">
+              <img src="../../../assets/View_details.svg" />
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div> -->
+</div>
+
+<!-- <app-passport-add [checkopen]="isaddopen" (send_data)="outputData($event)"></app-passport-add> -->
+
+<app-passport-add
+  [opens]="pageOpenClicked"
+  [edit_ps]="edit_ps"
+  [editData]="editRowData"
+  [view]="view"
+  [viewData]="viewRowData"
+></app-passport-add>
+
+<app-custom-mat-table
+  *ngIf="!loading"
+  [headerCols]="hederColumns"
+  [tabelData]="tableData"
+  (editPassenger)="editPassenger($event)"
+  (viewPassenger)="viewPassenger($event)"
+>
+</app-custom-mat-table>

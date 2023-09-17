@@ -1,0 +1,119 @@
+.HeadDivision{
+    box-shadow: 2px 2px 7px 0px #bababa40;
+    background: #ffffff;
+    box-shadow: 2px 2px 7px rgba(186, 186, 186, 0.25);
+    border-radius: 0px;
+}
+.circle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 33px;
+  }
+  .cross {
+    height: 34px;
+    width: 34px;
+    background-color: #efefef;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  mat-icon {
+    position: relative;
+    float: right;
+    // top: -3px;
+    cursor: pointer;
+    font-size: 20px !important;
+    color: rgba(235, 34, 81, 0.54);
+  }
+
+  .FirstDiv{
+  background-color: #eaf3f6;
+  width: 1300px;
+  height: 37px;
+  display: flex;
+  align-items: center;
+  }
+  .SecondDiv{
+    background-color: #eaf3f6;
+    width: 1300px;
+    height: 37px;
+    display: flex;
+    align-items: center;
+  }
+  .ThirdDiv{
+    background-color: #eaf3f6;
+    width: 1300px;
+    height: 37px;
+    display: flex;
+    align-items: center;
+  }
+  .FourthDiv{
+    background-color: #eaf3f6;
+    width: 1300px;
+    height: 37px;
+    display: flex;
+    align-items: center;
+  }
+
+  .FourthDivAir{
+    background-color: #eaf3f6;
+    width: 1300px;
+    height: 37px;
+    display: flex;
+    align-items: center;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border: none;
+  }
+
+  ::ng-deep .mat-mdc-text-field-wrapper {
+    height: 38px !important;
+    font-size: 15px;
+    // margin-bottom: 2px;
+    // padding-bottom: 2px;
+    // width: 24px !important;
+    // height: 24px !important;
+    // padding: 5px !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown mat-form-field + mat-form-field {
+  margin-left: 8px;
+}
+
+.warningSymbol{
+  color: brown;
+}
+
+mat-icon {
+  position: relative;
+  float: right;
+  // top: -3px;
+  cursor: pointer;
+  font-size: 20px !important;
+  color: rgba(235, 34, 81, 0.54);
+}
+
+.selector_icon{
+  position: relative;
+  right: 25px;
+    left:170px;
+    bottom:22px;
+  height: 15px;
+}
+
+// .mandatory {
+//   display: flex;
+//   align-items: center;
+//   justify-content: flex-end;
+//   padding-right: 33px;
+// }

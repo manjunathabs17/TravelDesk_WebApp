@@ -1,0 +1,363 @@
+<div class="firstLines">
+  <div class="row">
+    <div class="col-md-4 mt-2">
+      <label class="visa_heading mx-3">Travel Booking</label>
+    </div>
+    <div
+      class="col-md-7 d-flex justify-content-end mt-2"
+      style="margin-left: 72px"
+    >
+      <button class="addVisa text-white" (click)="openAdd()">
+        Add Booking
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- serach  -->
+<div class="row">
+  <div
+    class="dropdown-col d-flex flex-col position-realtive w-15 display: flex; align-text: center"
+  >
+    <mat-label>Debited To</mat-label>
+    <mat-form-field class="example-full-width" appearance="outline">
+      <input
+        id="bedited to"
+        type="text"
+        matInput
+        [formControl]="debitedTo"
+        [matAutocomplete]="auto"
+      />
+      <button
+        *ngIf="debitedTo.value?.company_name"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="clear(debitedTo)"
+      >
+        <mat-icon class="mat-icon">close</mat-icon>
+      </button>
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option
+          *ngFor="let option of companiesOption | async"
+          [value]="option"
+        >
+          {{ option.company_name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+  <div class="dropdown-col">
+    <div>
+      <mat-label>Company</mat-label>
+      <mat-form-field class="example-full-width" appearance="outline">
+        <input
+          type="text"
+          matInput
+          [formControl]="company"
+          [matAutocomplete]="auto1"
+        />
+        <button
+          *ngIf="company.value?.company_name"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="clear(company)"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn">
+          <mat-option
+            *ngFor="let option of companiesOptionC | async"
+            [value]="option"
+          >
+            {{ option.company_name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="dropdown-col">
+    <mat-label>Type of Booking</mat-label>
+    <mat-form-field class="example-full-width" appearance="outline">
+      <input
+        type="text"
+        matInput
+        [formControl]="typeOfBooking"
+        [matAutocomplete]="auto2"
+      />
+      <span style="flex-direction: row" *ngIf="types !== 'Air'">
+        <img
+          *ngIf="typeOfBooking.value === 'Air'"
+          src="../../../assets/Air.svg"
+      /></span>
+      <span *ngIf="types !== 'Hotel'">
+        <img
+          *ngIf="typeOfBooking.value === 'Hotel'"
+          src="../../../assets/Hotel.svg"
+        />
+      </span>
+      <span *ngIf="types !== 'Taxi'">
+        <img
+          *ngIf="typeOfBooking.value === 'Taxi'"
+          src="../../../assets/Travel.svg"
+        />
+      </span>
+
+      <button
+        *ngIf="typeOfBooking?.value"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="clear(typeOfBooking)"
+      >
+        <!-- <mat-icon>close</mat-icon> -->
+      </button>
+      <mat-autocomplete
+        #auto2="matAutocomplete"
+        [displayWith]="displayFnStatic"
+      >
+        <mat-option *ngFor="let option of types" [value]="option">
+          <span *ngIf="option === 'Air'"
+            ><img src="../../../assets/Air.svg" /> {{ option }}
+          </span>
+          <span *ngIf="option === 'Hotel'"
+            ><img src="../../../assets/Hotel.svg" /> {{ option }}
+          </span>
+          <span *ngIf="option === 'Taxi'"
+            ><img src="../../../assets/Travel.svg" /> {{ option }}
+          </span>
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+  <div class="dropdown-col">
+    <mat-label> Events</mat-label>
+
+    <mat-form-field class="example-full-width" appearance="outline">
+      <input
+        type="text"
+        matInput
+        [formControl]="eventsType"
+        [matAutocomplete]="auto3"
+      />
+      <button
+        *ngIf="eventsType.value?.event_name"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="clear(eventsType)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-autocomplete #auto3="matAutocomplete" [displayWith]="displayFnEvent">
+        <mat-option
+          *ngFor="let option of eventOptions | async"
+          [value]="option"
+        >
+          {{ option.event_name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+  <div class="dropdown-col">
+    <mat-label>Name</mat-label>
+
+    <mat-form-field class="example-full-width" appearance="outline">
+      <input
+        type="text"
+        matInput
+        [formControl]="name"
+        [matAutocomplete]="auto4"
+      />
+      <button
+        *ngIf="name.value?.emp_name"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="clear(name)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-autocomplete #auto4="matAutocomplete" [displayWith]="displayFnName">
+        <mat-option
+          *ngFor="let option of eventOptionsN | async"
+          [value]="option"
+        >
+          {{ option.emp_name }} {{ option.lastname }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+  <div class="dropdown-col">
+    <mat-label>Status</mat-label>
+
+    <mat-form-field class="example-full-width" appearance="outline">
+      <input
+        type="text"
+        matInput
+        [formControl]="status"
+        [matAutocomplete]="auto5"
+      />
+      <button
+        *ngIf="status?.value"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="clear(status)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-autocomplete
+        #auto5="matAutocomplete"
+        [displayWith]="displayFnStatus"
+      >
+        <mat-option *ngFor="let option of typesStatus" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+  <div class="dropdown-col position-realtive w-10">
+    <mat-label>From Date</mat-label>
+
+    <mat-form-field class="example-form-field" appearance="outline">
+      <input
+        type="text"
+        matInput
+        [formControl]="fromDate"
+        [matDatepicker]="datepicker"
+        placeholder="Select"
+      />
+      <button
+        *ngIf="fromDate?.value"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="clear(fromDate)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-datepicker-toggle
+        *ngIf="!fromDate?.value"
+        matIconSuffix
+        [for]="datepicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #datepicker>
+        <mat-datepicker-actions>
+          <button mat-button matDatepickerCancel>Cancel</button>
+          <button mat-raised-button color="primary" matDatepickerApply>
+            Apply
+          </button>
+        </mat-datepicker-actions>
+      </mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="dropdown-col">
+    <mat-label>To Date</mat-label>
+
+    <mat-form-field class="example-form-field" appearance="outline">
+      <input
+        type="text"
+        matInput
+        [formControl]="toDate"
+        [matDatepicker]="datepicker1"
+        [min]="fromDate.value"
+        placeholder="Select"
+      />
+      <button
+        *ngIf="toDate?.value"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="clear(toDate)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+
+      <mat-datepicker-toggle
+        *ngIf="!toDate?.value"
+        matIconSuffix
+        [for]="datepicker1"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #datepicker1>
+        <mat-datepicker-actions>
+          <button mat-button matDatepickerCancel>Cancel</button>
+          <button mat-raised-button color="primary" matDatepickerApply>
+            Apply
+          </button>
+        </mat-datepicker-actions>
+      </mat-datepicker>
+    </mat-form-field>
+    <!-- <input #datepickerInput class="mat-datepicker-input"  [formControl]="toDate" matInput [matDatepicker]="picker" placeholder="Select">
+
+        <mat-icon *ngIf="toDate?. value "matDatepickerToggleIcon (click)="clear(toDate)">clear</mat-icon>
+
+    <mat-datepicker-toggle *ngIf="!toDate?.value" matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field> -->
+  </div>
+
+  <div class="dropdown-col position-realtive p-3">
+    <button class="btnsSearch mt-2" style="margin-left: 5px" (click)="search()">
+      <img src="../../../assets/search_icon.svg" />
+    </button>
+  </div>
+</div>
+
+<!-- third -->
+
+<div class="twoActiionButtons mt-1 d-flex justify-content-end">
+  <button class="excelButtons" (click)="openDialog()">
+    Upload Invoice
+    <img src="../../../assets/Group 2082Export Icon.png" class="px-2" />
+  </button>
+  <button class="excelButtons mx-4" (click)="downloadExcel()">
+    Export Excel
+
+    <img src="../../../assets/Excell.svg " class="px-2" />
+  </button>
+  <button class="excelButtons" (click)="downloadPdf()">
+    Export PDF
+    <img src="../../../assets/Pdf.svg" class="px-3" />
+  </button>
+</div>
+
+<app-add-booking
+  [opens]="pageOpenClicked"
+  [edit]="edit"
+  [editData]="editRowData"
+  [view]="view"
+  [viewData]="viewRowData"
+  (closeEvent)="receivedEvent($event)"
+  [editData]="editRowData"
+>
+</app-add-booking>
+
+<div #contentToExport>
+  <app-custom-mat-table
+    *ngIf="!loading"
+    [headerCols]="hederColumns"
+    [tabelData]="tableData"
+    (uploadInvoice)="uploadInvoice($event)"
+    (editInvoice)="editInvoice($event)"
+    (viewInvoice)="viewInvoice($event)"
+    (downloadInvoice)="downloadInvoice($event)"
+  >
+  </app-custom-mat-table>
+</div>
+
+<app-upload-invoice
+  *ngIf="upload"
+  [opens]="openInvoice"
+  (closeEvent)="closeInvoice($event)"
+  [editData]="editRowData"
+>
+</app-upload-invoice>

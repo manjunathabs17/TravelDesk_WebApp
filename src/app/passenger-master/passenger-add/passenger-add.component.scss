@@ -1,0 +1,81 @@
+
+.HeadDivision{
+  box-shadow: 2px 2px 7px 0px #bababa40;
+  background: #ffffff;
+  box-shadow: 2px 2px 7px rgba(186, 186, 186, 0.25);
+  border-radius: 0px;
+}
+
+
+
+.circle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 33px;
+  }
+  .cross {
+    height: 34px;
+    width: 34px;
+    background-color: #efefef;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  mat-icon {
+    position: relative;
+    float: right;
+
+    cursor: pointer;
+    font-size: 20px !important;
+    color: rgba(235, 34, 81, 0.54);
+  }
+
+  ::ng-deep .mat-mdc-text-field-wrapper {
+    height: 38px !important;
+    font-size: 15px;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.Company_address{
+    width: 450px;
+}
+
+.slide-in-right[_ngcontent-oxf-c151] {
+    animation: slide-in-right .3s cubic-bezier(.25,.46,.45,.94) both;
+  }
+
+  .forms_wrapper[_ngcontent-oxf-c151] {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    right: 0;
+    transition: .5s all ease-in-out;
+  }
+
+  .Company_adr{
+    width: 450px;
+    height:150px;
+}
+
+.Phone{
+  width: 450px;
+  height:100px;
+}
+.email{
+  width: 450px;
+  height:100px;
+}
+.location{
+  width: 450px;
+  height:100px;
+}
+.date{
+  width: 220px;
+  height:38px;
+}

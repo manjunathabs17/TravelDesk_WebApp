@@ -1,0 +1,423 @@
+<div
+  *ngIf="opens"
+  class="forms_wrapper p-3 slide-in-right"
+  style="
+    height: 100%;
+    width: 93%;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: white;
+  "
+>
+  <div class="HeadDivision mt-4">
+    <div class="col-md-5">
+      <label
+        style="
+          width: 390px;
+          height: 38px;
+          display: flex;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 32px;
+          line-height: 38px;
+          color: #004761;
+        "
+      >
+        New Member</label
+      >
+    </div>
+    <div class="">
+      <div class="circle">
+        <div class="cross">
+          <img src="../../../assets/cross.svg" (click)="closePassenger()" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="passenger" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div style="width: 50%">
+        <div class="col-md-6 mt-4">
+          <mat-form-field class="Company_adr" appearance="outline">
+            <input
+              type="text"
+              class="profilePic"
+              formControlName="profilePic"
+              matInput
+              placeholder="Profile Pic"
+            />
+
+            <img src="../../../assets/blank.svg" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-5 mt-4">
+          <div class="phone">
+            <mat-form-field class="Phone" appearance="outline">
+              <input
+                type="text"
+                class="mobileNumber"
+                formControlName="mobileNumber"
+                matInput
+                placeholder="Mobile Number"
+              />
+              <img src="../../../assets/Mobile.svg" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 mt-4">
+            <mat-form-field class="email" appearance="outline">
+              <input
+                type="text"
+                class="email"
+                formControlName="email"
+                matInput
+                placeholder="Email ID"
+              />
+              <img src="../../../assets/Email_.svg" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-md-3 mt-4">
+          <mat-form-field class="location" appearance="outline">
+            <input
+              type="text"
+              class="companyLocation"
+              formControlName="companyLocation"
+              matInput
+              placeholder="Location"
+            />
+            <img src="../../../assets/Location.svg" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- --------------------Div------------------------------->
+
+      <div class="" style="width: 50%">
+        <div>
+          <h1>General Information</h1>
+          <div class="row">
+            <div class="col-md-4 mt-2">
+              <label>First Name <span style="color: red">*</span></label>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input
+                  type="text"
+                  class="border-0 border-bottom"
+                  style="outline: none"
+                  class="firstName"
+                  formControlName="firstName"
+                  matInput
+                  [ngClass]="{
+                    'is-invalid': submitted && c['firstName'].errors
+                  }"
+                />
+                <div
+                  *ngIf="submitted && c['firstName'].errors"
+                  class="invalid-feedback"
+                >
+                  <div class="mb-2" *ngIf="c['firstName'].errors['required']">
+                    Name Required
+                  </div>
+                </div>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 mt-2">
+              <label>Last Name <span style="color: red">*</span></label>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input
+                  type="text"
+                  class="border-0 border-bottom"
+                  style="outline: none"
+                  class="lastName"
+                  formControlName="lastName"
+                  matInput
+                  [ngClass]="{
+                    'is-invalid': submitted && c['lastName'].errors
+                  }"
+                />
+                <div
+                  *ngIf="submitted && c['lastName'].errors"
+                  class="invalid-feedback"
+                >
+                  <div class="mb-2" *ngIf="c['lastName'].errors['required']">
+                    Last Name Required
+                  </div>
+                </div>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 mt-2">
+              <mat-label
+                >Company Name <span style="color: red">*</span></mat-label
+              >
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input
+                  type="text"
+                  matInput
+                  formControlName="companyName"
+                  [matAutocomplete]="auto22"
+                  [ngClass]="{
+                    'is-invalid': submitted && c['companyName'].errors
+                  }"
+                />
+                <div
+                  *ngIf="submitted && c['companyName'].errors"
+                  class="invalid-feedback"
+                >
+                  <div class="mb-2" *ngIf="c['companyName'].errors['required']">
+                    Company Name required
+                  </div>
+                </div>
+
+                <button
+                  *ngIf="c['companyName'].value"
+                  matSuffix
+                  mat-icon-button
+                  aria-label="Clear"
+                  (click)="clear('companyName')"
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+
+                <mat-autocomplete
+                  #auto22="matAutocomplete"
+                  (optionSelected)="
+                    onChange($event.option.value, 'companyName')
+                  "
+                >
+                  <mat-option
+                    *ngFor="let option of companyNameOptions | async"
+                    [value]="option"
+                  >
+                    {{ option.company_name }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4 mt-0">
+              <label>Reporting Manager</label>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input
+                  type="text"
+                  class="border-0 border-bottom"
+                  style="outline: none"
+                  class="reportingManager"
+                  formControlName="reportingManager"
+                  matInput
+                  [ngClass]="{
+                    'is-invalid': submitted && c['reportingManager'].errors
+                  }"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 mt-2">
+              <mat-label> Date Of Birth </mat-label>
+
+              <mat-form-field class="date" appearance="outline">
+                <input
+                  formControlName="dateOfBirth"
+                  matInput
+                  [matDatepicker]="datepicker33"
+                  placeholder="Select"
+                  [ngClass]="{
+                    'is-invalid': submitted && c['dateOfBirth'].errors
+                  }"
+                />
+
+                <button
+                  *ngIf="c['dateOfBirth'].value"
+                  matSuffix
+                  mat-icon-button
+                  aria-label="Clear"
+                  (click)="clear('dateOfBirth')"
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+
+                <mat-datepicker-toggle
+                  *ngIf="!c['dateOfBirth']?.value"
+                  matIconSuffix
+                  [for]="datepicker33"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #datepicker33>
+                  <mat-datepicker-actions>
+                    <button mat-button matDatepickerCancel>Cancel</button>
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      matDatepickerApply
+                    >
+                      Apply
+                    </button>
+                  </mat-datepicker-actions>
+                </mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 mt-2">
+              <label>Phone Number</label>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input
+                  type="text"
+                  class="border-0 border-bottom"
+                  style="outline: none"
+                  class="phoneNumber"
+                  formControlName="phoneNumber"
+                  matInput
+                  [ngClass]="{
+                    'is-invalid': submitted && c['phoneNumber'].errors
+                  }"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 mt-2">
+              <label>Email ID</label>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input
+                  type="text"
+                  class="border-0 border-bottom"
+                  style="outline: none"
+                  class="emailId"
+                  formControlName="emailId"
+                  matInput
+                  [ngClass]="{
+                    'is-invalid': submitted && c['emailId'].errors
+                  }"
+                />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 mt-2">
+              <label>Address</label>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input
+                  type="text"
+                  class="border-0 border-bottom"
+                  style="outline: none"
+                  class="passengerAddress"
+                  formControlName="passengerAddress"
+                  matInput
+                  [ngClass]="{
+                    'is-invalid': submitted && c['passengerAddress'].errors
+                  }"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 mt-2">
+              <mat-label>Country </mat-label>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="country"
+                  formControlName="country"
+                  matInput
+                  [matAutocomplete]="auto36"
+                  [ngClass]="{
+                    'is-invalid': submitted && c['country'].errors
+                  }"
+                />
+
+                <button
+                  *ngIf="c['country'].value"
+                  matSuffix
+                  mat-icon-button
+                  aria-label="Clear"
+                  (click)="clear('country')"
+                >
+                  <mat-icon class="mat-icon">close</mat-icon>
+                </button>
+                <mat-autocomplete
+                  #auto36="matAutocomplete"
+                  (optionSelected)="onChange($event.option.value, 'country')"
+                >
+                  <mat-option
+                    *ngFor="let option of CountryOptions | async"
+                    [value]="option"
+                  >
+                    {{ option.name }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 mt-2">
+              <label>State</label>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input
+                  type="text"
+                  class="border-0 border-bottom"
+                  style="outline: none"
+                  class="state"
+                  formControlName="state"
+                  matInput
+                  [ngClass]="{
+                    'is-invalid': submitted && c['state'].errors
+                  }"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 mt-2">
+              <label>City</label>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input
+                  type="text"
+                  class="border-0 border-bottom"
+                  style="outline: none"
+                  class="city"
+                  formControlName="city"
+                  matInput
+                  [ngClass]="{
+                    'is-invalid': submitted && c['city'].errors
+                  }"
+                />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 mt-2">
+              <label>Pincode</label>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input
+                  type="text"
+                  class="border-0 border-bottom"
+                  style="outline: none"
+                  class="pinCode"
+                  formControlName="pinCode"
+                  matInput
+                  [ngClass]="{
+                    'is-invalid': submitted && c['pinCode'].errors
+                  }"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="mandatory">
+          <span><span style="color: red">*</span> Mandatory fields</span>
+        </div>
+        <div>
+          <button class="btn btn-primary" type="submit">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

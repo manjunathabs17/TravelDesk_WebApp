@@ -1,0 +1,133 @@
+<div class="HeadDivision">
+  <div class="row">
+    <div class="col-md-10">
+      <div class="FirstDiv">
+        <label
+          style="
+            width: 297px;
+            height: 47px;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 30px;
+            line-height: 47px;
+            color: #283b42;
+            margin-left: 23px;
+          "
+          >Events</label
+        >
+      </div>
+    </div>
+
+    <div class="col-md-2 pt-2 mt-2 pb-2">
+      <button
+        class="border-0 text-white"
+        style="
+          background-color: #004761;
+          text-align: center;
+          background-color: #004761;
+          padding-left: 15px;
+          border: 1px;
+
+          color: #e2f5fb;
+          border: none;
+          height: 30px;
+          width: 150px;
+          border-radius: 10px;
+        "
+        (click)="openEvent()"
+      >
+        <img
+          src="../../../assets/addPassport.svg"
+          style="
+            margin-right: 4px;
+            left: 89.2%;
+            right: 10.12%;
+            top: 13.65%;
+            bottom: 85.28%;
+          "
+        />
+        Add Event
+      </button>
+    </div>
+  </div>
+
+  <!-- <span style="position: absolute;
+  top: 23%; margin-left: 50px; font-size: 25px; font-weight: 700px;  color: #283b42;">Personal</span>
+   <span style="position: absolute;
+   top: 27%; margin-left: 50px; font-size: 15px;  color: #283b42;">Personal</span>
+  <div class="ps-5 mt-5" >
+    <input type="text" readonly style="width:1170px; height:60px;background-color: #F9F9F9;
+    border-radius: 16px; border: none;">
+    <div style="display: flex;
+    justify-content: flex-end;
+    padding-right: 217px;">
+     <button style="position: absolute;
+     top: 25%; background-color: #def8f2; border: none; width:60px; height: 30px;border-radius: 5px;" >
+       <img src="../../../assets/Edit_invoice.svg" >
+        </button>
+        </div>
+        <div style="margin-left: 1100px;">
+        <button style="position: absolute;
+        top: 25%;background-color:  #f8dede; border: none; width:60px; height: 30px;border-radius: 5px;">
+<img src="../../../assets/Delete.svg">
+        </button>
+        </div>
+   </div>
+   <span style="position: absolute;
+  top: 36%; margin-left: 50px; font-size: 25px; font-weight: 700px;  color: #283b42;">Travel Event New</span>
+   <span style="position: absolute;
+   top: 40%; margin-left: 50px; font-size: 15px;  color: #283b42;">This is a new Travel Event!!!</span>
+  <div class="ps-5 mt-5" >
+    <input type="text" readonly style="width:1170px; height:60px;background-color: #F9F9F9;
+    border-radius: 16px; border: none;">
+    <div style="display: flex;
+    justify-content: flex-end;
+    padding-right: 217px;">
+     <button style="position: absolute;
+     top: 38%; background-color: #def8f2; border: none; width:60px; height: 30px;border-radius: 5px;" >
+       <img src="../../../assets/Edit_invoice.svg" >
+        </button>
+        </div>
+        <div style="margin-left: 1100px;">
+        <button style="position: absolute;
+        top: 38%;background-color:  #f8dede; border: none; width:60px; height: 30px;border-radius: 5px;">
+<img src="../../../assets/Delete.svg">
+        </button>
+        </div>
+   </div> -->
+</div>
+
+<div class="serchBypipe" style="height: 10vh">
+  <div class="row">
+    <div class="col-md-10 d-flex justify-content-center">
+      <input
+        type="text"
+        name="search"
+        class="SearchForex"
+        id="searhPipes"
+        placeholder="Search"
+        autocomplete="off"
+      />
+    </div>
+    <span>
+      <img src="../../../assets/search_icon.svg" />
+    </span>
+  </div>
+</div>
+
+<app-events-add
+  [opens]="pageOpenClicked"
+  (closeEvent)="receivedEvent($event)"
+  [updateEvent]="updateEvent"
+  [updateData]="deleteEventData"
+>
+</app-events-add>
+
+<app-custom-mat-table
+  *ngIf="!loading"
+  [headerCols]="hederColumns"
+  [tabelData]="tableData"
+  (updateEVENTS)="updateEVENTS($event)"
+  (deleteEVENTS)="deleteEVENTS($event)"
+>
+</app-custom-mat-table>

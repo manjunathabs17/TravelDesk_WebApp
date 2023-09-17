@@ -1,0 +1,123 @@
+.visa_heading{
+    // width: 213px;
+// height: 47px;
+// left: 123px;
+// top: 129px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 700;
+font-size: 40px;
+line-height: 47px;
+/* identical to box height */
+
+color: #283B42;
+}
+
+.addVisa{
+    padding: 10px;
+    width: 161px;
+height: 35px;
+left: 1526px;
+top: 141px;
+background: none;
+border: none;
+outline: none;
+
+
+
+// background-image: url(../../../assets/plusicon.svg) 10px 10px no-repeat;
+background: #004761;
+border-radius: 11px;
+}
+
+
+
+.searchFilters{
+// width: 1570px;
+height: 84px;
+left: 123px;
+top: 201px;
+
+background: #F9F9F9;
+border-radius: 16px;
+}
+
+.btnsSearch{
+    box-sizing: border-box;
+border: none;
+    // position: absolute;
+    width: 37px;
+    height: 35px;
+    left: 1629px;
+    top: 226px;
+    
+    background: #004761;
+    border-radius: 19px;
+}
+
+.textBoxes{
+box-sizing: border-box;
+width: 80px;
+height: 30px;
+left: 147px;
+top: 229px;
+background: #FFFFFF;
+border: 1px solid #F6F6F6;
+border-radius: 19px; 
+outline: none;
+padding: 5px 10px;
+}
+
+
+
+.lables_name{
+width: 15px;
+height: 15px;
+left: 164px;
+top: 211px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 500;
+font-size: 13px;
+line-height: 15px;
+color: #404E53;
+}
+
+.excelButtons{
+    width: 153px;
+    height: 35px;
+    left: 1352px;
+    top: 302px;
+    border: 1px solid black !important;
+    border-radius: 9px;
+    outline: none;
+    border: none;
+    background: white;
+}
+
+.twoActiionButtons{
+    position: relative;
+    right: 3%;
+}
+.visa{
+    width: 150px;
+    margin-left: 10px;
+    text-align: center;  
+  }
+  ::ng-deep .mat-mdc-text-field-wrapper {
+    height: 38px !important;
+    font-size: 15px;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;  
+  }
+  .text_label{
+    text-align: center;
+  }
+.searchButtons{
+    position: relative;
+    margin-top: 12px;
+    margin-left: 10px;
+}

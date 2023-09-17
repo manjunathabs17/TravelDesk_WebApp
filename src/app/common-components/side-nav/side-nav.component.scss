@@ -1,0 +1,20 @@
+.side_nav_container {
+  background-color: #FAFDFF;
+  padding: 10px;
+  border-radius: 30px;
+  border: 1.5px solid #F9F9F9;
+  box-shadow: 1px 0px 4px #F0F0F0;
+ 
+}
+
+.menu_items {
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+.home_button {
+  height: 55px;
+  width: 55px;
+  border-radius: 13px;
+}

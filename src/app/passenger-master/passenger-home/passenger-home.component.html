@@ -1,0 +1,99 @@
+<div class="firstLine mt-2">
+  <div class="row">
+    <div class="col-md-3">
+      <label class="pass_heading">Passenger Master</label>
+    </div>
+
+    <!-- <div class="col-md-3">
+      <input
+        type="text"
+        placeholder="Filter"
+        class="addFilters"
+        style="
+          border: none;
+          border: 1px solid black;
+          background: FDFDFD;
+          border-radius: 10px;
+          height: 35px;
+        "
+      />
+    </div> -->
+    <div class="search-hero">
+      <input
+        class="form-control"
+        type="text"
+        name="search"
+        [(ngModel)]="searchText"
+        autocomplete="off"
+        placeholder="Search"
+      />
+    </div>
+    <div class="col-md-3">
+      <button class="addButtons text-white" (click)="openPassenger()">
+        <img
+          src="../../../assets/plusicon.svg"
+          style="position: relative; right: 12%"
+        />
+        New Member
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-passenger-add
+  [opens]="pageOpenClicked"
+  [edit_passenger]="edit_passenger"
+  [editData]="editRowData"
+></app-passenger-add>
+
+<!-- (click)="edit_Passenger(employee)" -->
+<div class="cards">
+  <a routerLink="/update_Access"></a>
+  <div
+    *ngFor="
+      let employee of employeeData
+        | paginate : { itemsPerPage: 20, currentPage: p }
+        | filter : searchText
+    "
+  >
+    <mat-card class="example-card">
+      <img src="../../../assets/User.svg" style="height: 100px" />
+      <mat-card-header class="empName">
+        {{ employee.emp_name }}</mat-card-header
+      >
+      <div
+        class="content"
+        style="height: 50px; width: 230px; background-color: rgb(236, 213, 213)"
+      >
+        <p><span>Company :</span>{{ employee.company_name }}</p>
+        <p><span>DOB :</span>{{ employee.emp_dob }}</p>
+        <p style="height: 30px; width: 230px; background-color: #def8f2">
+          <img src="../../../assets/Email.svg" style="height: 20px" />
+          <span>{{ employee.email_id }}</span>
+        </p>
+
+        <p style="height: 30px; width: 230px; background-color: #def8f2">
+          <img src="../../../assets/Call.svg" style="height: 20px" />
+          <span>{{ employee.phone }}</span>
+        </p>
+      </div>
+    </mat-card>
+  </div>
+
+  <div class="card_spinner">
+    <mat-spinner class="spinner"></mat-spinner>
+  </div>
+</div>
+<div class="pagination">
+  <pagination-controls
+    (pageChange)="p = $event"
+    class="float-right"
+  ></pagination-controls>
+</div>
+<!-- <tbody>
+  <tr *ngFor="let employee of employeeData | filter : searchText">
+    <td>{{ employee.emp_name }}</td>
+    <td>{{ employee.email_id }}</td>
+    <td>{{ employee.phone }}</td>
+  </tr>
+</tbody> -->

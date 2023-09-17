@@ -1,0 +1,155 @@
+<mat-table #table [dataSource]="data" matSort>
+  <ng-container *ngFor="let column of headerCols" [cdkColumnDef]="column.name">
+    <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{
+      column.displayName
+    }}</mat-header-cell>
+
+    <mat-cell *cdkCellDef="let row; &quot;flex-row&quot;">
+      <span *ngIf="column.name !== 'action'">
+        <img
+          *ngIf="row?.type === 'air_booking' && column?.name === 'debit_to'"
+          src="../../../assets/Air.svg"
+        />
+        <img
+          *ngIf="row?.type === 'hotel_booking' && column?.name === 'debit_to'"
+          src="../../../assets/Hotel.svg"
+        />
+        <img
+          *ngIf="row?.type === 'road_travel' && column?.name === 'debit_to'"
+          src="../../../assets/Travel.svg"
+        />
+        {{
+          row[column?.name]?.length > 12
+            ? (row[column?.name] | slice : 0 : 12) + "..."
+            : row[column?.name]
+        }}</span
+      >
+
+      <span *ngIf="column.name === 'action'" class="d-flex">
+        <button
+          style="border: none; background-color: white"
+          (click)="upload_invoice(row)"
+        >
+          <img src="../../../assets/Upload_invoice.svg" />
+        </button>
+        <button
+          style="border: none; background-color: white"
+          (click)="edit_invoice(row)"
+        >
+          <img src="../../../assets/Edit_invoice.svg" />
+        </button>
+        <button
+          style="border: none; background-color: white"
+          (click)="view_invoice(row)"
+        >
+          <img src="../../../assets/View_details.svg" />
+        </button>
+        <button
+          style="border: none; background-color: white"
+          (click)="download_invoice(row)"
+        >
+          <img src="../../../assets/Download_invoice.svg" />
+        </button>
+      </span>
+
+      <!-------------- FOREX ACTION BUTTON---------------->
+      <span *ngIf="column.name === 'forexaction'" class="d-flex">
+        <button
+          class="updateButtons"
+          style="background-color: #004761; color: white"
+          (click)="update_forex(row)"
+        >
+          Update
+        </button>
+      </span>
+
+      <!-------------- ACCESS CONTROL ACTION BUTTON---------------->
+
+      <span *ngIf="column.name === 'accessaction'" class="d-flex">
+        <button
+          class="updateButtons"
+          style="background-color: #004761; color: white"
+          (click)="update_Access(row)"
+        >
+          Edit Access
+        </button>
+      </span>
+
+      <!-------------- EVENT ACTION BUTTON---------------->
+
+      <span
+        *ngIf="column.name === 'eventAction'"
+        class="d-flex"
+        style="gap: 20px"
+      >
+        <button
+          style="
+            /* position: absolute; */
+            top: 25%;
+            background-color: #def8f2;
+            border: none;
+            width: 60px;
+            height: 30px;
+            border-radius: 5px;
+          "
+          (click)="update_Event(row)"
+        >
+          <img src="../../../assets/Edit_invoice.svg" />
+        </button>
+
+        <button
+          style="
+            /* position: absolute; */
+            top: 25%;
+            background-color: #f8dede;
+            border: none;
+            width: 60px;
+            height: 30px;
+            border-radius: 5px;
+          "
+          (click)="deleteRow(row)"
+        >
+          <img src="../../../assets/Delete.svg" />
+        </button>
+        <!-- <button (click)="deleteRow(row)"><i class="fa fa-trash"></i></button> -->
+      </span>
+
+      <!-- --------------------------PASSPORT ACTION BUTTON----------------------------------->
+      <span *ngIf="column.name === 'passport'" class="d-flex">
+        <button
+          style="border: none; background-color: white"
+          (click)="edit_passport(row)"
+        >
+          <img src="../../../assets/Edit_invoice.svg" />
+        </button>
+        <button
+          style="border: none; background-color: white"
+          (click)="view_passenger(row)"
+        >
+          <img src="../../../assets/View_details.svg" />
+        </button>
+      </span>
+      <!-- --------------------------VISA ACTION BUTTON----------------------------------->
+      <span *ngIf="column.name === 'visa'" class="d-flex">
+        <button
+          style="border: none; background-color: white"
+          (click)="edit_visa(row)"
+        >
+          <img src="../../../assets/Edit_invoice.svg" />
+        </button>
+        <button
+          style="border: none; background-color: white"
+          (click)="view_visa(row)"
+        >
+          <img src="../../../assets/View_details.svg" />
+        </button>
+      </span>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="columnNames"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columnNames"></mat-row>
+</mat-table>
+<mat-paginator [length]="resultsLength" [pageSize]="5"> </mat-paginator>
+
+<!-- -------------------------Cards------------------------------>

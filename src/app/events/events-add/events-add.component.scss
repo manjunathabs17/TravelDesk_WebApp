@@ -1,0 +1,81 @@
+.circle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 33px;
+}
+.cross {
+  height: 34px;
+  width: 34px;
+  background-color: #efefef;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  .SecondDiv{
+    width:480px;
+    height:140px;
+    background-color: #F9F9F9;
+    border-radius: 20px;
+  }
+
+//   ::ng-deep .mat-mdc-text-field-wrapper {
+//     height: 38px !important;
+//     font-size: 15px;
+//     display: inline-flex !important;
+//     align-items: center;
+//     justify-content: center;
+// }
+
+// .form_container[_ngcontent-oxf-c137] {
+//   max-height: 80%;
+//   width: 40%;
+//   background-color: #fff;
+//   padding: 40px;
+//   border-radius: 20px;
+//   height: 400px;
+// }
+// .position-relative {
+//   position: relative !important;
+// }
+// .px-4 {
+//   padding-right: 1.5rem !important;
+//   padding-left: 1.5rem !important;
+// }
+// .p-3 {
+//   padding: 1rem !important;
+//     padding-right: 1rem;
+//     padding-left: 1rem;
+// }
+// .justify-content-between {
+//   justify-content: space-between !important;
+// }
+// .d-flex {
+//   display: flex !important;
+// }
+
+// .row {
+//   --bs-gutter-x: 1.5rem;
+//   --bs-gutter-y: 0;
+//   display: flex;
+//   flex-wrap: wrap;
+//   margin-top: calc(-1 * var(--bs-gutter-y));
+//   margin-right: calc(-.5 * var(--bs-gutter-x));
+//   margin-left: calc(-.5 * var(--bs-gutter-x));
+// }
+
+// .event{
+//   display: flex;
+//   overflow: scroll;
+//   height: 500px;
+//   width: 400px;
+// }
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  height: 38px !important;
+  font-size: 15px;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+}

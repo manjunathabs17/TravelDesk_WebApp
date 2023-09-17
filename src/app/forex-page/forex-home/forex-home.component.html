@@ -1,0 +1,58 @@
+<div class="firstLines">
+  <div class="row">
+    <div class="col-md-4 mt-2">
+      <label class="visa_heading mx-3">Forex Details</label>
+    </div>
+    <div
+      class="col-md-7 d-flex justify-content-end mt-2"
+      style="margin-left: 72px"
+    >
+      <button class="addVisa text-white" (click)="openForex()">
+        <img
+          src="../../../assets/addPassport.svg"
+          style="
+            margin-right: 4px;
+            left: 89.2%;
+            right: 10.12%;
+            top: 13.65%;
+            bottom: 85.28%;
+          "
+        />
+        Enter Forex
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="serchBypipe" style="height: 15vh">
+  <div class="row">
+    <div class="col-md-10 d-flex justify-content-center">
+      <input
+        type="text"
+        name="search"
+        class="SearchForex"
+        id="searhPipes"
+        placeholder="Search"
+        autocomplete="off"
+      />
+    </div>
+    <span>
+      <img src="../../../assets/search_icon.svg" />
+    </span>
+  </div>
+</div>
+
+<app-add-forex
+  [opens]="pageOpenClicked"
+  (closeEvent)="receivedEvent($event)"
+  [update]="update"
+  [updateData]="updateRowData"
+></app-add-forex>
+
+<app-custom-mat-table
+  *ngIf="!loading"
+  [headerCols]="hederColumns"
+  [tabelData]="tableData"
+  (updateForex)="updateForex($event)"
+>
+</app-custom-mat-table>

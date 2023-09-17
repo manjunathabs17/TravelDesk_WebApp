@@ -1,0 +1,806 @@
+<div
+  *ngIf="opens"
+  class="all_datas"
+  style="
+    height: 100%;
+    width: 93%;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: white;
+  "
+>
+  <div class="HeadDivision mt-4">
+    <div class="col-md-5">
+      <label
+        style="
+          width: 390px;
+          height: 38px;
+          display: flex;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 32px;
+          line-height: 38px;
+          color: #004761;
+        "
+      >
+        Add Forex</label
+      >
+    </div>
+    <div class="">
+      <div class="circle">
+        <div class="cross">
+          <img src="../../../assets/cross.svg" (click)="closeForm()" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="addForex" (ngSubmit)="onSubmit()">
+    <div class="row mt-1">
+      <div class="col-md-2 mt-2 form-group">
+        <mat-label>Vendor's Name <span style="color: red">*</span></mat-label>
+        <mat-form-field class="example-full-width" fxflex="75%">
+          <input
+            type="text"
+            class="form-control"
+            id="vedorForex"
+            formControlName="vedorForex"
+            matInput
+            [matAutocomplete]="auto1"
+            [ngClass]="{
+              'is-invalid': submitted && c['vedorForex'].errors
+            }"
+          />
+          <div
+            *ngIf="submitted && c['vedorForex'].errors"
+            class="invalid-feedback"
+          >
+            <div class="mb-2" *ngIf="c['vedorForex'].errors['required']">
+              Vendor Name required
+            </div>
+          </div>
+
+          <button
+            *ngIf="c['vedorForex'].value"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="clear('vedorForex')"
+          >
+            <mat-icon class="mat-icon">close</mat-icon>
+          </button>
+          <mat-autocomplete
+            #auto1="matAutocomplete"
+            (optionSelected)="onChange($event.option.value, 'vedorForex')"
+          >
+            <mat-option
+              *ngFor="let option of vendorOptions | async"
+              [value]="option"
+            >
+              {{ option.airline_name }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-2 mt-2">
+        <mat-label>Traveler's Name <span style="color: red">*</span></mat-label>
+        <mat-form-field class="example-full-width" fxflex="75%">
+          <input
+            type="text"
+            class="form-control"
+            id="travelerName"
+            formControlName="travelerName"
+            matInput
+            [matAutocomplete]="auto2"
+            [ngClass]="{
+              'is-invalid': submitted && c['travelerName'].errors
+            }"
+          />
+          <div
+            *ngIf="submitted && c['travelerName'].errors"
+            class="invalid-feedback"
+          >
+            <div class="mb-2" *ngIf="c['travelerName'].errors['required']">
+              Traveler Name required
+            </div>
+          </div>
+
+          <button
+            *ngIf="c['travelerName'].value"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="clear('travelerName')"
+          >
+            <mat-icon class="mat-icon">close</mat-icon>
+          </button>
+          <mat-autocomplete
+            #auto2="matAutocomplete"
+            (optionSelected)="onChange($event.option.value, 'travelerName')"
+          >
+            <mat-option
+              *ngFor="let option of travelerOptions | async"
+              [value]="option"
+            >
+              {{ option.emp_name }} {{ option.lastname }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-2 mt-2">
+        <label>Designation</label>
+        <mat-form-field class="example-full-width" fxflex="75%">
+          <input
+            type="text"
+            class="border-0 border-bottom"
+            style="outline: none"
+            class="designation"
+            formControlName="designation"
+            matInput
+            [ngClass]="{
+              'is-invalid': submitted && c['designation'].errors
+            }"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-2 mt-2">
+        <mat-label
+          >Visiting Country <span style="color: red">*</span></mat-label
+        >
+        <mat-form-field class="example-full-width" fxflex="75%">
+          <input
+            type="text"
+            class="form-control"
+            id="visitCountry"
+            formControlName="visitCountry"
+            matInput
+            [matAutocomplete]="auto36"
+            [ngClass]="{
+              'is-invalid': submitted && c['visitCountry'].errors
+            }"
+          />
+          <div
+            *ngIf="submitted && c['visitCountry'].errors"
+            class="invalid-feedback"
+          >
+            <div class="mb-2" *ngIf="c['visitCountry'].errors['required']">
+              Country Name Is Required
+            </div>
+          </div>
+
+          <button
+            *ngIf="c['visitCountry'].value"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="clear('visitCountry')"
+          >
+            <mat-icon class="mat-icon">close</mat-icon>
+          </button>
+          <mat-autocomplete
+            #auto36="matAutocomplete"
+            (optionSelected)="onChange($event.option.value, 'visitCountry')"
+          >
+            <mat-option
+              *ngFor="let option of visitCountryOptions | async"
+              [value]="option"
+            >
+              {{ option.name }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-2 mt-2">
+        <label>No Of Day <span style="color: red">*</span></label>
+        <mat-form-field class="example-full-width" fxflex="75%">
+          <input
+            type="text"
+            class="border-0 border-bottom"
+            style="outline: none"
+            class="noOfDay"
+            formControlName="noOfDay"
+            matInput
+            [ngClass]="{
+              'is-invalid': submitted && c['noOfDay'].errors
+            }"
+          />
+          <div
+            *ngIf="submitted && c['noOfDay'].errors"
+            class="invalid-feedback"
+          >
+            <div class="mb-2" *ngIf="c['noOfDay'].errors['required']">
+              No of days Required
+            </div>
+          </div>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-2 mt-2">
+        <mat-label>Departure Date <span style="color: red">*</span></mat-label>
+
+        <mat-form-field class="example-form-field" fxflex="75%">
+          <input
+            formControlName="forexDeparture"
+            matInput
+            [matDatepicker]="datepicker31"
+            placeholder="Select"
+            [ngClass]="{
+              'is-invalid': submitted && c['forexDeparture'].errors
+            }"
+          />
+
+          <div
+            *ngIf="submitted && c['forexDeparture'].errors"
+            class="invalid-feedback"
+          >
+            <div class="mb-2" *ngIf="c['forexDeparture'].errors['required']">
+              Departure Date required
+            </div>
+          </div>
+
+          <button
+            *ngIf="c['forexDeparture'].value"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="clear('forexDeparture')"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+
+          <mat-datepicker-toggle
+            *ngIf="!c['forexDeparture']?.value"
+            matIconSuffix
+            [for]="datepicker31"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #datepicker31>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancel</button>
+              <button mat-raised-button color="primary" matDatepickerApply>
+                Apply
+              </button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-2 mt-2">
+        <mat-label>Return date <span style="color: red">*</span></mat-label>
+
+        <mat-form-field class="example-form-field" fxflex="75%">
+          <input
+            formControlName="forexReturn"
+            matInput
+            [matDatepicker]="datepicker32"
+            placeholder="Select"
+            [ngClass]="{
+              'is-invalid': submitted && c['forexReturn'].errors
+            }"
+          />
+
+          <div
+            *ngIf="submitted && c['forexReturn'].errors"
+            class="invalid-feedback"
+          >
+            <div class="mb-2" *ngIf="c['forexReturn'].errors['required']">
+              Return Date required
+            </div>
+          </div>
+
+          <button
+            *ngIf="c['forexReturn'].value"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="clear('forexReturn')"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+
+          <mat-datepicker-toggle
+            *ngIf="!c['forexReturn']?.value"
+            matIconSuffix
+            [for]="datepicker32"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #datepicker32>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancel</button>
+              <button mat-raised-button color="primary" matDatepickerApply>
+                Apply
+              </button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="FourthDiv ps-2 mt-2">
+        <label
+          style="
+            width: 1200px;
+            height: 37px;
+            background: #eaf3f6;
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 23px;
+            letter-spacing: 0em;
+            text-align: center;
+            color: #58a7c3;
+            display: contents;
+          "
+          >Forex Details
+        </label>
+      </div>
+      <div class="row mt-1">
+        <div class="col-md-2 mt-2">
+          <mat-label>Exchange Date <span style="color: red">*</span></mat-label>
+
+          <mat-form-field class="example-form-field" fxflex="75%">
+            <input
+              formControlName="forexExchange"
+              matInput
+              [matDatepicker]="datepicker33"
+              placeholder="Select"
+              [ngClass]="{
+                'is-invalid': submitted && c['forexExchange'].errors
+              }"
+            />
+
+            <div
+              *ngIf="submitted && c['forexExchange'].errors"
+              class="invalid-feedback"
+            >
+              <div class="mb-2" *ngIf="c['forexExchange'].errors['required']">
+                Exchange Date required
+              </div>
+            </div>
+
+            <button
+              *ngIf="c['forexExchange'].value"
+              matSuffix
+              mat-icon-button
+              aria-label="Clear"
+              (click)="clear('forexExchange')"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+
+            <mat-datepicker-toggle
+              *ngIf="!c['forexExchange']?.value"
+              matIconSuffix
+              [for]="datepicker33"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #datepicker33>
+              <mat-datepicker-actions>
+                <button mat-button matDatepickerCancel>Cancel</button>
+                <button mat-raised-button color="primary" matDatepickerApply>
+                  Apply
+                </button>
+              </mat-datepicker-actions>
+            </mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-md-2 mt-2">
+          <label>Total Tax Purchased<span style="color: red">*</span></label>
+          <mat-form-field class="example-full-width" fxflex="75%">
+            <input
+              type="text"
+              class="border-0 border-bottom"
+              style="outline: none"
+              class="taxPurchased"
+              formControlName="taxPurchased"
+              #input
+              matInput
+              [ngClass]="{
+                'is-invalid': submitted && c['taxPurchased'].errors
+              }"
+            />
+            <div
+              *ngIf="submitted && c['taxPurchased'].errors"
+              class="invalid-feedback"
+            >
+              <div class="mb-2" *ngIf="c['taxPurchased'].errors['required']">
+                Purchase is Required
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+        <div class="col-md-2 mt-2">
+          <label>Currency <span style="color: red">*</span></label>
+          <mat-form-field class="example-full-width" fxflex="75%">
+            <input
+              type="text"
+              class="border-0 border-bottom"
+              style="outline: none"
+              class="currency"
+              formControlName="currency"
+              matInput
+              [ngClass]="{
+                'is-invalid': submitted && c['currency'].errors
+              }"
+            />
+            <div
+              *ngIf="submitted && c['currency'].errors"
+              class="invalid-feedback"
+            >
+              <div class="mb-2" *ngIf="c['currency'].errors['required']">
+                Currency Required
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-2 mt-2">
+          <label>Average Cost</label>
+          <mat-form-field class="example-full-width" fxflex="75%">
+            <input
+              type="text"
+              class="border-0 border-bottom"
+              style="outline: none"
+              class="averageCost"
+              formControlName="averageCost"
+              matInput
+              placeholder="0"
+              [ngClass]="{
+                'is-invalid': submitted && c['averageCost'].errors
+              }"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-md-2 mt-2">
+          <label>Entertainment</label>
+          <mat-form-field class="example-full-width" fxflex="75%">
+            <input
+              type="text"
+              class="border-0 border-bottom"
+              style="outline: none"
+              class="entertainment"
+              formControlName="entertainment"
+              matInput
+              [ngClass]="{
+                'is-invalid': submitted && c['entertainment'].errors
+              }"
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-2 mt-2">
+          <label>Debited To <span style="color: red">*</span></label>
+          <mat-form-field class="example-full-width" fxflex="75%">
+            <input
+              type="text"
+              class="form-control"
+              id="forexdebitedTo"
+              formControlName="forexdebitedTo"
+              matInput
+              [matAutocomplete]="auto6"
+              [ngClass]="{
+                'is-invalid': submitted && c['forexdebitedTo'].errors
+              }"
+            />
+            <div
+              *ngIf="submitted && c['forexdebitedTo'].errors"
+              class="invalid-feedback"
+            >
+              <div class="mb-2" *ngIf="c['forexdebitedTo'].errors['required']">
+                Debit to Company Required
+              </div>
+            </div>
+
+            <button
+              *ngIf="c['forexdebitedTo'].value"
+              matSuffix
+              mat-icon-button
+              aria-label="Clear"
+              (click)="clear('forexdebitedTo')"
+            >
+              <mat-icon class="mat-icon">close</mat-icon>
+            </button>
+
+            <mat-autocomplete
+              #auto6="matAutocomplete"
+              (optionSelected)="onChange($event.option.value, 'forexdebitedTo')"
+            >
+              <mat-option
+                *ngFor="let option of forexdebitedToOptrions | async"
+                [value]="option"
+              >
+                {{ option.company_name }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-2 mt-2">
+          <label>INR Amount <span style="color: red">*</span></label>
+          <mat-form-field class="example-full-width" fxflex="75%">
+            <input
+              type="text"
+              class="border-0 border-bottom"
+              style="outline: none"
+              class="inrAmount"
+              formControlName="inrAmount"
+              matInput
+              [ngClass]="{
+                'is-invalid': submitted && c['inrAmount'].errors
+              }"
+            />
+            <div
+              *ngIf="submitted && c['inrAmount'].errors"
+              class="invalid-feedback"
+            >
+              <div class="mb-2" *ngIf="c['inrAmount'].errors['required']">
+                Amount Required
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+        <div class="col-md-2 mt-2">
+          <label>Bill No<span style="color: red">*</span></label>
+          <mat-form-field class="example-full-width" fxflex="75%">
+            <input
+              type="text"
+              class="border-0 border-bottom"
+              style="outline: none"
+              class="billNo"
+              formControlName="billNo"
+              matInput
+              [ngClass]="{
+                'is-invalid': submitted && c['billNo'].errors
+              }"
+            />
+            <div
+              *ngIf="submitted && c['billNo'].errors"
+              class="invalid-feedback"
+            >
+              <div class="mb-2" *ngIf="c['billNo'].errors['required']">
+                Bill Required
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+        <div class="col-md-2 mt-2">
+          <label>Payment Details</label>
+          <mat-form-field class="example-full-width" fxflex="75%">
+            <input
+              type="text"
+              class="border-0 border-bottom"
+              style="outline: none"
+              class="paymentDetails"
+              formControlName="paymentDetails"
+              matInput
+              [ngClass]="{
+                'is-invalid': submitted && c['paymentDetails'].errors
+              }"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-md-2 mt-2">
+          <label>Remarks</label>
+          <mat-form-field class="example-full-width" fxflex="75%">
+            <input
+              type="text"
+              class="border-0 border-bottom"
+              style="outline: none"
+              class="forexRemarks"
+              formControlName="forexRemarks"
+              matInput
+              [ngClass]="{
+                'is-invalid': submitted && c['forexRemarks'].errors
+              }"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="FourthDiv ps-2 mt-2">
+          <label
+            style="
+              width: 1200px;
+              height: 37px;
+              background: #eaf3f6;
+              font-size: 20px;
+              font-weight: 500;
+              line-height: 23px;
+              letter-spacing: 0em;
+              text-align: center;
+              color: #58a7c3;
+              display: contents;
+            "
+          >
+            Surrender Forex
+          </label>
+        </div>
+        <div class="row mt-1">
+          <div class="col-md-2 mt-2">
+            <label>Refund Amount In foreign currency</label>
+            <mat-form-field class="example-full-width" fxflex="75%">
+              <input
+                type="text"
+                class="border-0 border-bottom"
+                style="outline: none"
+                class="foreignCurrency"
+                formControlName="foreignCurrency"
+                matInput
+                [ngClass]="{
+                  'is-invalid': submitted && c['foreignCurrency'].errors
+                }"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-2 mt-2">
+            <label>INR Refund Amount</label>
+            <mat-form-field class="example-full-width" fxflex="75%">
+              <input
+                type="text"
+                class="border-0 border-bottom"
+                style="outline: none"
+                class="inrRefundAmount"
+                formControlName="inrRefundAmount"
+                matInput
+                [ngClass]="{
+                  'is-invalid': submitted && c['inrRefundAmount'].errors
+                }"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-2 mt-2">
+            <label> Refund Check No</label>
+            <mat-form-field class="example-full-width" fxflex="75%">
+              <input
+                type="text"
+                class="border-0 border-bottom"
+                style="outline: none"
+                class="checkNo"
+                formControlName="checkNo"
+                matInput
+                [ngClass]="{
+                  'is-invalid': submitted && c['checkNo'].errors
+                }"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-2 mt-2">
+            <label> Refund Bank</label>
+            <mat-form-field class="example-full-width" fxflex="75%">
+              <input
+                type="text"
+                class="border-0 border-bottom"
+                style="outline: none"
+                class="refundBank"
+                formControlName="refundBank"
+                matInput
+                [ngClass]="{
+                  'is-invalid': submitted && c['refundBank'].errors
+                }"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-2 mt-2">
+            <label> Check No</label>
+            <mat-form-field class="example-full-width" fxflex="75%">
+              <input
+                type="text"
+                class="border-0 border-bottom"
+                style="outline: none"
+                class="forexCheckNo"
+                formControlName="forexCheckNo"
+                matInput
+                [ngClass]="{
+                  'is-invalid': submitted && c['forexCheckNo'].errors
+                }"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-2 mt-2">
+            <mat-label> Date Of Cheque </mat-label>
+
+            <mat-form-field class="example-form-field" fxflex="75%">
+              <input
+                formControlName="dateOfCheck"
+                matInput
+                [matDatepicker]="datepicker34"
+                placeholder="Select"
+                [ngClass]="{
+                  'is-invalid': submitted && c['dateOfCheck'].errors
+                }"
+              />
+
+              <button
+                *ngIf="c['dateOfCheck'].value"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="clear('dateOfCheck')"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+
+              <mat-datepicker-toggle
+                *ngIf="!c['dateOfCheck']?.value"
+                matIconSuffix
+                [for]="datepicker34"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #datepicker34>
+                <mat-datepicker-actions>
+                  <button mat-button matDatepickerCancel>Cancel</button>
+                  <button mat-raised-button color="primary" matDatepickerApply>
+                    Apply
+                  </button>
+                </mat-datepicker-actions>
+              </mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-2 mt-2">
+            <label> Bank Name</label>
+            <mat-form-field class="example-full-width" fxflex="75%">
+              <input
+                type="text"
+                class="border-0 border-bottom"
+                style="outline: none"
+                class="bankName"
+                formControlName="bankName"
+                matInput
+                [ngClass]="{
+                  'is-invalid': submitted && c['bankName'].errors
+                }"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-2 mt-2">
+            <label> Refund Bill No</label>
+            <mat-form-field class="example-full-width" fxflex="75%">
+              <input
+                type="text"
+                class="border-0 border-bottom"
+                style="outline: none"
+                class="refundBillNo"
+                formControlName="refundBillNo"
+                matInput
+                [ngClass]="{
+                  'is-invalid': submitted && c['refundBillNo'].errors
+                }"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-2 mt-2">
+            <label> Refund Bill Amount INR</label>
+            <mat-form-field class="example-full-width" fxflex="75%">
+              <input
+                type="text"
+                class="border-0 border-bottom"
+                style="outline: none"
+                class="refundBillAmount"
+                formControlName="refundBillAmount"
+                matInput
+                [ngClass]="{
+                  'is-invalid': submitted && c['refundBillAmount'].errors
+                }"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mandatory">
+      <span><span style="color: red">*</span> Mandatory fields</span>
+    </div>
+    <div>
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+  </form>
+</div>

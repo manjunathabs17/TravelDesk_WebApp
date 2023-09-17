@@ -1,0 +1,640 @@
+// new
+.threeDropDowns {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  height: 38px !important;
+  font-size: 15px;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.inputBoxes{
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+
+}
+
+
+
+
+
+
+
+//country dropdowns
+
+#dropDownsDataSize {
+  width: 231px;
+}
+
+#dropDownBtn {
+  color: black;
+  background-color: white;
+
+  border-radius: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 231px;
+  height: 38px;
+  left: 42px;
+  top: 159px;
+  border: 1px solid #9ea1a1;
+  border-radius: 19px;
+}
+
+.alldata {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+//textBoxes
+
+#visaTextBoxes {
+  outline: none;
+  width: 197px;
+}
+
+#enterTextBox {
+  outline: none;
+  //figma
+  width: 185px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  // line-height: 19px;
+  /* identical to box height */
+  color: #4e5254;
+}
+
+//visa detsils
+.allForms {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#largetext {
+  outline: none;
+  width: 394px;
+}
+.saveButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+//last flightArrow
+
+.firstListDetails {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  // figma
+  box-sizing: border-box;
+  width: 90%;
+  height: 60px;
+  left: 143px;
+  top: 773px;
+
+  background: #ffffff;
+  box-shadow: 0px 4px 18px 6px #edefee;
+  border-radius: 5px;
+}
+
+#UpdateButtonsInLast {
+  border: none;
+  background: none;
+  margin: 0;
+  padding: 0;
+}
+
+#firstHeading {
+  width: 541px;
+  height: 38px;
+  left: 39px;
+  top: 25px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 38px;
+  /* identical to box height */
+
+  color: #004761;
+}
+
+#personalBackgrounds {
+  width: 1644px;
+  height: 37px;
+  left: 0px;
+  top: 84px;
+
+  background: #eaf3f6;
+}
+#headLines {
+  width: 150px;
+  height: 23px;
+  left: 42px;
+  top: 93px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  text-align: center;
+
+  color: #58a7c4;
+}
+#companyBackground {
+  width: 1644px;
+  height: 37px;
+  left: 0px;
+  top: 214px;
+
+  background: #eaf3f6;
+}
+#nameComp {
+  width: 150px;
+  height: 23px;
+  left: 42px;
+  top: 223px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  text-align: center;
+
+  color: #58a7c4;
+}
+#countryHead {
+  width: 1644px;
+  height: 37px;
+  left: 0px;
+  top: 344px;
+
+  background: #eaf3f6;
+}
+#countryLabelss {
+  width: 71px;
+  height: 23px;
+  left: 42px;
+  top: 351px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  text-align: center;
+
+  color: #58a7c4;
+}
+#visaBackgrounds {
+  width: 1644px;
+  height: 37px;
+  left: 0px;
+  top: 471px;
+  background: #eaf3f6;
+}
+#ii {
+  width: 100%;
+  // width: 106px;
+  height: 23px;
+  left: 50px;
+  top: 478px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+
+  color: #58a7c4;
+}
+
+#enterDetailsBack {
+  width: 1644px;
+  height: 37px;
+  left: 1px;
+  top: 712px;
+  background: #eaf3f7;
+}
+#entDetailsFont {
+  width: 100%;
+  height: 23px;
+  left: 39px;
+  top: 719px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+
+  color: #58a7c4;
+}
+
+#saveButtonText {
+  width: 46px;
+  height: 21px;
+  left: 1507px;
+  top: 662px;
+  cursor: pointer;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 23px;
+
+  color: #ffffff;
+}
+.saveClickBtn {
+  width: 154px;
+  height: 40px;
+  left: 1453px;
+  top: 652px;
+
+  background: #2a7b9b;
+  box-shadow: 0px 8px 13px rgba(203, 203, 233, 0.5);
+  border-radius: 8px;
+}
+
+#hedainngOfPersonalDetails {
+  width: 60px;
+  height: 16px;
+  left: 43px;
+  top: 141px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: #91999b;
+}
+#hedainngOfPersonalDetails2 {
+  width: 100%;
+
+  height: 16px;
+  left: 317px;
+  top: 147px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: #91999b;
+}
+#debitLabels {
+  width: 100%;
+  // width: 67px;
+  height: 16px;
+  left: 52px;
+  top: 268px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: #91999b;
+}
+
+#authLabel {
+  // width: 50px;
+  height: 16px;
+  left: 327px;
+  top: 268px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: #91999b;
+}
+#passedToLabels {
+  // width: 65px;
+  height: 16px;
+  left: 602px;
+  top: 268px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: #91999b;
+}
+
+#enteriesLabels {
+  // width: 89px;
+  height: 16px;
+  left: 43px;
+  top: 528px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: #91999b;
+}
+
+#invitFormLables {
+  // width: 95px;
+  height: 16px;
+  left: 262px;
+  top: 528px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: #91999b;
+}
+
+#creditCardsLabels {
+  // width: 92px;
+  height: 16px;
+  left: 481px;
+  top: 528px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: #91999b;
+}
+#ticketGivenlabels {
+  // width: 74px;
+  height: 16px;
+  left: 700px;
+  top: 528px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: #91999b;
+}
+#insLabels {
+  // width: 62px;
+  height: 16px;
+  left: 919px;
+  top: 528px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: #91999b;
+}
+#financialabels {
+  // width: 104px;
+  height: 16px;
+  left: 1138px;
+  top: 528px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: #91999b;
+}
+#feeLabels {
+  // width: 77px;
+  height: 16px;
+  left: 1420px;
+  top: 528px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: #91999b;
+}
+#remarksLabels {
+  width: 49px;
+  height: 16px;
+  left: 43px;
+  top: 608px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: #91999b;
+}
+.closingActionOnRight {
+  width: 35px;
+  height: 30px;
+
+  left: 97.58%;
+  right: 0.34%;
+  top: 1.61%;
+  bottom: 95.33%;
+
+  background: #efefef;
+  // transform: rotate(45deg);
+}
+
+// angular Calenders
+
+#insuranceTextBoxe {
+  outline: none;
+  margin-left: -12px;
+  width: 107px;
+}
+
+#ticketextBoxe {
+  outline: none;
+  width: 90px;
+}
+
+// newww
+#imgWidth {
+  width: 250px;
+}
+#rowBoxData {
+  box-sizing: border-box;
+  width: 1335px;
+  height: 68px;
+  left: 143px;
+  top: 773px;
+  background: #ffffff;
+  box-shadow: 0px 4px 18px 6px #edefee;
+  border-radius: 5px;
+}
+
+// lasttt
+
+#firstListDetails {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  // figma
+  box-sizing: border-box;
+  width: 1260px;
+  height: 60px;
+  background: #ffffff;
+  box-shadow: 0px 4px 18px 6px #edefee;
+  border-radius: 5px;
+  color: #8f9092;
+}
+
+#listOfEmployeData {
+  border-style: none;
+  border-bottom: 1px solid black;
+  outline: none;
+}
+
+
+.labels_styles{
+
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 16px;
+
+color: #91999B;
+}
+
+#hedainngOfPersonalDetails1 {
+//   width: 60px;
+//   height: 16px;
+//   left: 43px;
+//   top: 141px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: #91999b;
+}
+
+// newwwwww
+
+#creditLabels {
+  margin: -5px;
+}
+
+#tableButtons {
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+#twoActions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+#tableHeaderNames {
+  width: 1538px;
+  height: 40px;
+
+  background: #f9f9f9;
+  border-radius: 16px;
+}
+
+::ng-deep {
+  &.autocomplete-container {
+    width: 175px;
+  }
+}
+
+.mat-mdc-form-field {
+  --mat-mdc-form-field-floating-label-scale: 0.75;
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 0;
+  text-align: left;
+}
+
+::ng-deep {
+  &.mdc-line-ripple::before,
+  .mdc-line-ripple::after {
+    border: none !important;
+  }
+}
+::ng-deep {
+  &.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: #ffffff !important;
+    border: 1px solid #9ea1a1;
+    border-radius: 19px;
+    width: 160px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+#tableColoumnNameStyle {
+  // width: 72px;
+  // height: 18px;
+  left: 199px;
+  top: 387px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 18px;
+
+  color: #7b868a;
+}
+#tableColoumnNameStyle {
+  // width: 72px;
+  // height: 18px;
+  left: 199px;
+  top: 387px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 18px;
+
+  color: #7b868a;
+}

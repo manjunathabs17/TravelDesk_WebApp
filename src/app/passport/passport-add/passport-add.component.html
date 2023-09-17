@@ -1,0 +1,504 @@
+<!-- <div *ngIf=“check” class=“firts” style=“height: 100%; width: 93%; position: absolute; z-index: 1; top: 0; right: 0; background-color: white;“ -->
+
+<div
+  class="all_inputs"
+  *ngIf="opens"
+  style="
+    height: 100%;
+    width: 93%;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: white;
+  "
+>
+  <div class="HeadDivision mt-4">
+    <div class="row">
+      <div class="col-md-8">
+        <label
+          style="
+            width: 360px;
+            height: 38px;
+            display: flex;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 32px;
+            line-height: 38px;
+            color: #004761;
+          "
+          >Enter Passport Details</label
+        >
+      </div>
+      <div class="col-md-4">
+        <div class="circle">
+          <div class="cross">
+            <img src="../../../assets/cross.svg" (click)="closeForm()" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="FirstDiv mt-4">
+      <label
+        style="
+          width: 1200px;
+          height: 37px;
+          background: #eaf3f6;
+          font-family: Roboto;
+          font-size: 20px;
+          font-weight: 500;
+          line-height: 23px;
+          letter-spacing: 0em;
+          text-align: center;
+          color: #58a7c3;
+          display: contents;
+        "
+        >Personal Details</label
+      >
+    </div>
+    <form [formGroup]="addPassenger" (ngSubmit)="onSubmit()">
+      <div class="mt-3">
+        <div class="row">
+          <div class="col-md-2 ps-2">
+            <label>Company <span style="color: red">*</span></label>
+            <mat-form-field class="passport" fxflex="75%">
+              <input
+                type="text"
+                class="companyPassenger"
+                id="companyPassenger"
+                formControlName="companyPassenger"
+                matInput
+                [matAutocomplete]="auto51"
+                [ngClass]="{
+                  'is-invalid': submitted && c['companyPassenger'].errors
+                }"
+              />
+              <div
+                *ngIf="submitted && c['companyPassenger'].errors"
+                class="invalid-feedback"
+              >
+                <div
+                  class="mb-2"
+                  *ngIf="c['companyPassenger'].errors['required']"
+                >
+                  Company name required
+                </div>
+              </div>
+
+              <button
+                *ngIf="c['companyPassenger'].value"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="clear('companyPassenger')"
+              >
+                <mat-icon class="mat-icon">close</mat-icon>
+              </button>
+              <mat-autocomplete
+                #auto51="matAutocomplete"
+                (optionSelected)="
+                  onChange($event.option.value, 'companyPassenger')
+                "
+              >
+                <mat-option
+                  *ngFor="let option of companyoptions | async"
+                  [value]="option"
+                >
+                  {{ option.company_name }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-2 mt-2">
+            <label>Name<span style="color: red">*</span></label>
+            <mat-form-field class="example-full-width" fxflex="75%">
+              <input
+                type="text"
+                id="passengerName"
+                formControlName="passengerName"
+                matInput
+                [matAutocomplete]="auto2"
+                [ngClass]="{
+                  'is-invalid': submitted && c['passengerName'].errors
+                }"
+              />
+              <div
+                *ngIf="submitted && c['passengerName'].errors"
+                class="invalid-feedback"
+              >
+                <div class="mb-2" *ngIf="c['passengerName'].errors['required']">
+                  Employee Name required
+                </div>
+              </div>
+              <button
+                *ngIf="c['passengerName'].value"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="clear('passengerName')"
+              >
+                <mat-icon class="mat-icon">close</mat-icon>
+              </button>
+              <mat-autocomplete
+                #auto2="matAutocomplete"
+                (optionSelected)="
+                  onChange($event.option.value, 'passengerName')
+                "
+              >
+                <mat-option
+                  *ngFor="let option of passengeroptions | async"
+                  [value]="option"
+                >
+                  {{ option.emp_name }} {{ option.lastname }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-2 mt-2">
+            <label>Address</label>
+            <mat-form-field class="example-full-width" fxflex="75%">
+              <input
+                type="text"
+                class="border-0 border-bottom"
+                style="outline: none"
+                class="passengerAddress"
+                formControlName="passengerAddress"
+                matInput
+                [ngClass]="{
+                  'is-invalid': submitted && c['passengerAddress'].errors
+                }"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-2 mt-2">
+            <label>Spouse/Father Name</label>
+            <mat-form-field class="example-full-width" fxflex="75%">
+              <input
+                type="text"
+                class="border-0 border-bottom"
+                style="outline: none"
+                class="fatherName"
+                formControlName="fatherName"
+                matInput
+                [ngClass]="{
+                  'is-invalid': submitted && c['fatherName'].errors
+                }"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-2 mt-2">
+            <mat-label
+              >Date Of Birth <span style="color: red">*</span></mat-label
+            >
+
+            <mat-form-field class="example-form-field" fxflex="75%">
+              <input
+                formControlName="dateOfbirth"
+                matInput
+                [matDatepicker]="datepicker30"
+                placeholder="Select"
+                [ngClass]="{
+                  'is-invalid': submitted && c['dateOfbirth'].errors
+                }"
+              />
+
+              <div
+                *ngIf="submitted && c['dateOfbirth'].errors"
+                class="invalid-feedback"
+              >
+                <div class="mb-2" *ngIf="c['dateOfbirth'].errors['required']">
+                  Departure Date required
+                </div>
+              </div>
+
+              <button
+                *ngIf="c['dateOfbirth'].value"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="clear('dateOfbirth')"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+
+              <mat-datepicker-toggle
+                *ngIf="!c['dateOfbirth']?.value"
+                matIconSuffix
+                [for]="datepicker30"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #datepicker30>
+                <mat-datepicker-actions>
+                  <button mat-button matDatepickerCancel>Cancel</button>
+                  <button mat-raised-button color="primary" matDatepickerApply>
+                    Apply
+                  </button>
+                </mat-datepicker-actions>
+              </mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="SecondDiv mt-3 ps-1">
+          <label
+            style="
+              width: 1200px;
+              height: 37px;
+              background: #eaf3f6;
+              font-family: Roboto;
+              font-size: 20px;
+              font-weight: 500;
+              line-height: 23px;
+              letter-spacing: 0em;
+              text-align: center;
+              color: #58a7c3;
+              display: contents;
+            "
+            >Passport Details</label
+          >
+        </div>
+        <div class="row">
+          <div class="col-md-2 mt-2">
+            <label>Passport Number</label>
+            <mat-form-field class="example-full-width" fxflex="75%">
+              <input
+                type="text"
+                class="border-0 border-bottom"
+                style="outline: none"
+                class="passportNum"
+                formControlName="passportNum"
+                matInput
+                [ngClass]="{
+                  'is-invalid': submitted && c['passportNum'].errors
+                }"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-2 mt-2">
+            <label>Nationality</label>
+            <mat-form-field class="example-full-width" fxflex="75%">
+              <input
+                type="text"
+                class="border-0 border-bottom"
+                style="outline: none"
+                class="nationality"
+                formControlName="nationality"
+                matInput
+                [ngClass]="{
+                  'is-invalid': submitted && c['nationality'].errors
+                }"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-2 mt-2">
+            <mat-label
+              >Date Of Issue <span style="color: red">*</span></mat-label
+            >
+
+            <mat-form-field class="example-form-field" fxflex="75%">
+              <input
+                formControlName="dateOfIssue"
+                matInput
+                [matDatepicker]="datepicker31"
+                placeholder="Select"
+                [ngClass]="{
+                  'is-invalid': submitted && c['dateOfIssue'].errors
+                }"
+              />
+
+              <div
+                *ngIf="submitted && c['dateOfIssue'].errors"
+                class="invalid-feedback"
+              >
+                <div class="mb-2" *ngIf="c['dateOfIssue'].errors['required']">
+                  Date required
+                </div>
+              </div>
+
+              <button
+                *ngIf="c['dateOfIssue'].value"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="clear('dateOfIssue')"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+
+              <mat-datepicker-toggle
+                *ngIf="!c['dateOfIssue']?.value"
+                matIconSuffix
+                [for]="datepicker31"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #datepicker31>
+                <mat-datepicker-actions>
+                  <button mat-button matDatepickerCancel>Cancel</button>
+                  <button mat-raised-button color="primary" matDatepickerApply>
+                    Apply
+                  </button>
+                </mat-datepicker-actions>
+              </mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-2 mt-2">
+            <mat-label
+              >Date Of Expiry <span style="color: red">*</span></mat-label
+            >
+
+            <mat-form-field class="example-form-field" fxflex="75%">
+              <input
+                formControlName="dateOfExpiry"
+                matInput
+                [matDatepicker]="datepicker32"
+                placeholder="Select"
+                [ngClass]="{
+                  'is-invalid': submitted && c['dateOfExpiry'].errors
+                }"
+              />
+
+              <div
+                *ngIf="submitted && c['dateOfExpiry'].errors"
+                class="invalid-feedback"
+              >
+                <div class="mb-2" *ngIf="c['dateOfExpiry'].errors['required']">
+                  Date required
+                </div>
+              </div>
+
+              <button
+                *ngIf="c['dateOfExpiry'].value"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="clear('dateOfExpiry')"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+
+              <mat-datepicker-toggle
+                *ngIf="!c['dateOfExpiry']?.value"
+                matIconSuffix
+                [for]="datepicker32"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #datepicker32>
+                <mat-datepicker-actions>
+                  <button mat-button matDatepickerCancel>Cancel</button>
+                  <button mat-raised-button color="primary" matDatepickerApply>
+                    Apply
+                  </button>
+                </mat-datepicker-actions>
+              </mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="uploadLabels">
+            <label>Upload Passport</label>
+          </div>
+          <div class="inputsFiles">
+            <div class="upload">
+              <input type="file" formControlName="uploadPassport" />
+            </div>
+          </div>
+        </div>
+        <div class="actionsButtonsSetsOfTwo mt-2">
+          <div
+            class="row"
+            style="
+              display: flex;
+              flex-direction: row;
+              justify-content: flex-end;
+            "
+          >
+            <div>
+              <button *ngIf="!view" class="btn btn-primary" type="submit">
+                Submit
+              </button>
+            </div>
+            <!-- <div class="col-md-2">
+              <div class="saveButtons" style="margin-right: 58px">
+                <button class="saveClickBtn border-0">
+                  <input type="submit" />
+                  <label
+                    style="
+                      width: 46px;
+                      height: 21px;
+                      left: 1507px;
+                      top: 662px;
+                      cursor: pointer;
+                      font-style: normal;
+                      font-weight: 600;
+                      font-size: 20px;
+                      line-height: 23px;
+
+                      color: #ffffff;
+                    "
+                    >Save</label
+                  >
+                </button>
+              </div>
+            </div> -->
+          </div>
+        </div>
+        <!-- <div class="ThirdDiv ps-1 mt-2">
+          <label
+            style="
+              width: 1200px;
+              height: 37px;
+              background: #eaf3f6;
+              font-size: 20px;
+              font-weight: 500;
+              line-height: 23px;
+              letter-spacing: 0em;
+              text-align: center;
+              color: #58a7c3;
+              display: contents;
+            "
+            >Entered Details</label
+          >
+        </div> -->
+      </div>
+    </form>
+    <!-- <div class="ps-3 mt-3" style="width: 1285px; border-radius: 16px">
+      <table class="table border">
+        <thead>
+          <tr style="background: #f9f9f9; border-radius: 16px">
+            <th scope="col">Company</th>
+            <th scope="col">Employee Name</th>
+            <th scope="col">Date of Birth</th>
+            <th scope="col">Address</th>
+            <th scope="col">Father Name</th>
+            <th scope="col">Passport No</th>
+            <th scope="col">Nationality</th>
+            <th scope="col">Date of Issue</th>
+            <th scope="col">Date of Expiry</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">CMT</th>
+            <td>Faraz Khan</td>
+            <td>01-09-1999</td>
+            <td>marol naka Andheri</td>
+            <td>Faraz</td>
+            <td>12345676543</td>
+            <td>Indian</td>
+            <td>02-09-2023</td>
+            <td>02-09-2023</td>
+            <td>
+              <button style="border: none; background-color: white">
+                <img src="../../../assets/Edit_invoice.svg" />
+              </button>
+              <button style="border: none; background-color: white">
+                <img src="../../../assets/View_details.svg" />
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div> -->
+  </div>
+</div>
